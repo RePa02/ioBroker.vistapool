@@ -302,6 +302,19 @@ async function test(name, fn) {
         assert.equal(f.interval1.from, 28800);
         assert.equal(c9.sent.map(changes).find(x => x.light).light.mode, 1);
     });
+    await test('Modus manuell + Pumpe ein im selben Buendel: ein verfolgter Befehl', async () => {
+        const a19 = mockAdapter(), c19 = mockCloud();
+        const h19 = new PoolHandler(a19, c19, 'P', { commandGap: 0, coalesceMs: 30, maxPerMinute: 0 });
+        const d19 = doc(); d19.filtration.mode = 4; d19.filtration.status = 0;
+        await h19.update(d19);
+        await Promise.all([h19.handleStateChange('filtration.mode', 0), h19.handleStateChange('filtration.on', true)]);
+        assert.equal(c19.sent.length, 1);
+        const f = changes(c19.sent[0]).filtration;
+        assert.equal(f.mode, 0);
+        assert.equal(f.status, 1);
+        assert.equal(h19.inflight.size, 1, 'Bestaetigung wird verfolgt');
+        assert.ok(!a19.logs.some(l => l.includes('not "manual"')));
+    });
     await test('Ungueltiger Wert im Buendel blockiert die anderen nicht', async () => {
         const a10 = mockAdapter(), c10 = mockCloud();
         const h10 = new PoolHandler(a10, c10, 'P', { commandGap: 0, coalesceMs: 30, maxPerMinute: 0 });

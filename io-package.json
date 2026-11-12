@@ -1,8 +1,21 @@
 {
     "common": {
         "name": "vistapool",
-        "version": "0.3.0",
+        "version": "0.3.1",
         "news": {
+            "0.3.1": {
+                "en": "Fix: pump mode \"manual\" and pump on/off written together are sent as one tracked command",
+                "de": "Fehlerbehebung: Pumpenmodus „manuell“ und Pumpe ein/aus gleichzeitig geschrieben werden als ein bestätigter Befehl gesendet",
+                "ru": "Исправлено: режим насоса «ручной» и включение/выключение насоса, записанные одновременно, отправляются одной отслеживаемой командой",
+                "pt": "Correção: modo da bomba \"manual\" e ligar/desligar a bomba escritos juntos são enviados como um comando monitorizado",
+                "nl": "Fix: pompmodus \"handmatig\" en pomp aan/uit die samen worden geschreven, worden als één gevolgd commando verzonden",
+                "fr": "Correctif : le mode de pompe « manuel » et la mise en marche/arrêt de la pompe écrits ensemble sont envoyés en une seule commande suivie",
+                "it": "Correzione: modalità pompa \"manuale\" e accensione/spegnimento pompa scritti insieme vengono inviati come un unico comando monitorato",
+                "es": "Corrección: el modo de bomba \"manual\" y el encendido/apagado de la bomba escritos juntos se envían como un único comando supervisado",
+                "pl": "Poprawka: tryb pompy „ręczny” i włączenie/wyłączenie pompy zapisane razem są wysyłane jako jedno śledzone polecenie",
+                "uk": "Виправлено: режим насоса «ручний» та увімкнення/вимкнення насоса, записані разом, надсилаються однією відстежуваною командою",
+                "zh-cn": "修复：同时写入的泵模式“手动”和泵开/关作为一条受跟踪的命令发送"
+            },
             "0.3.0": {
                 "en": "Push updates instead of polling; commands are merged and rate limited; status states for online, pending commands and last command; automatic clock sync (drift and daylight saving time); back-off on cloud errors; English texts",
                 "de": "Push-Aktualisierung statt Polling; Befehle werden gebündelt und begrenzt; Status-Datenpunkte für Online, offene Befehle und letzten Befehl; automatische Uhrzeit-Synchronisation (Abweichung und Sommerzeit); Backoff bei Cloud-Fehlern; englische Texte",

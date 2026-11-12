@@ -140,6 +140,9 @@ Hayward, AquaRite, Vistapool, Sugar Valley, Kripsol and Dagen are trademarks of 
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
+### 0.3.1 (2026-11-12)
+- (RePa02) Fix: pump mode "manual" and pump on/off written together are sent as one tracked command (the mode check used the old mode)
+
 ### 0.3.0 (2026-11-12)
 - (RePa02) Push updates via the Firestore listen stream instead of polling; polling remains as fallback and safety net
 - (RePa02) Writes within one second are merged into one command per branch; at most 6 commands per minute
