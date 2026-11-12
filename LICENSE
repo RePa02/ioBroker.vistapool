@@ -1,0 +1,45 @@
+MIT License
+
+Copyright (c) 2026 René Paul <github@news-flash.org>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---------------------------------------------------------------------------
+Third-party notice
+
+Protocol knowledge and parts of the command logic are derived from
+aioaquarite (https://github.com/fdebrus/aioaquarite), MIT License,
+Copyright (c) the aioaquarite authors.
+
+The data point catalogue follows the Home Assistant "vistapool" integration
+(https://www.home-assistant.io/integrations/vistapool), Apache License 2.0.
+No Home Assistant source code is included.
+
+The meaning of the settings fields was derived from the public Vistapool
+web application. No code of that application is included.
+
+lib/proto/listen.proto is a reduced copy of the Cloud Firestore API
+definitions (googleapis/google/firestore/v1), Copyright Google LLC,
+licensed under the Apache License, Version 2.0
+(http://www.apache.org/licenses/LICENSE-2.0).
+
+Hayward, AquaRite, Vistapool and Sugar Valley are trademarks of their
+respective owners. This project is not affiliated with or endorsed by them.
+
+This software was developed with the assistance of Claude (Anthropic).

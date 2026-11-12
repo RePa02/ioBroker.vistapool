@@ -1,0 +1,132 @@
+// Subset of the Cloud Firestore API v1 needed for the Listen stream.
+// Field numbers and names taken from googleapis/google/firestore/v1/{firestore,write,document}.proto
+// Copyright 2024 Google LLC, Apache License 2.0 (http://www.apache.org/licenses/LICENSE-2.0).
+// Reduced to the messages used here; google.rpc.Status and google.type.LatLng are inlined
+// (wire compatible), fields not needed are omitted (unknown fields are skipped when decoding).
+syntax = "proto3";
+
+package google.firestore.v1;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/struct.proto";
+import "google/protobuf/wrappers.proto";
+
+service Firestore {
+  rpc Listen(stream ListenRequest) returns (stream ListenResponse);
+}
+
+message ListenRequest {
+  string database = 1;
+  oneof target_change {
+    Target add_target = 2;
+    int32 remove_target = 3;
+  }
+  map<string, string> labels = 4;
+}
+
+message ListenResponse {
+  oneof response_type {
+    TargetChange target_change = 2;
+    DocumentChange document_change = 3;
+    DocumentDelete document_delete = 4;
+    DocumentRemove document_remove = 6;
+    ExistenceFilter filter = 5;
+  }
+}
+
+message Target {
+  message DocumentsTarget {
+    repeated string documents = 2;
+  }
+  oneof target_type {
+    DocumentsTarget documents = 3;
+  }
+  oneof resume_type {
+    bytes resume_token = 4;
+    google.protobuf.Timestamp read_time = 11;
+  }
+  int32 target_id = 5;
+  bool once = 6;
+  google.protobuf.Int32Value expected_count = 12;
+}
+
+message TargetChange {
+  enum TargetChangeType {
+    NO_CHANGE = 0;
+    ADD = 1;
+    REMOVE = 2;
+    CURRENT = 3;
+    RESET = 4;
+  }
+  TargetChangeType target_change_type = 1;
+  repeated int32 target_ids = 2;
+  Status cause = 3;
+  bytes resume_token = 4;
+  google.protobuf.Timestamp read_time = 6;
+}
+
+// google.rpc.Status (details omitted)
+message Status {
+  int32 code = 1;
+  string message = 2;
+}
+
+message DocumentChange {
+  Document document = 1;
+  repeated int32 target_ids = 5;
+  repeated int32 removed_target_ids = 6;
+}
+
+message DocumentDelete {
+  string document = 1;
+  repeated int32 removed_target_ids = 6;
+  google.protobuf.Timestamp read_time = 4;
+}
+
+message DocumentRemove {
+  string document = 1;
+  repeated int32 removed_target_ids = 2;
+  google.protobuf.Timestamp read_time = 4;
+}
+
+message ExistenceFilter {
+  int32 target_id = 1;
+  int32 count = 2;
+}
+
+message Document {
+  string name = 1;
+  map<string, Value> fields = 2;
+  google.protobuf.Timestamp create_time = 3;
+  google.protobuf.Timestamp update_time = 4;
+}
+
+message Value {
+  oneof value_type {
+    google.protobuf.NullValue null_value = 11;
+    bool boolean_value = 1;
+    int64 integer_value = 2;
+    double double_value = 3;
+    google.protobuf.Timestamp timestamp_value = 10;
+    string string_value = 17;
+    bytes bytes_value = 18;
+    string reference_value = 5;
+    LatLng geo_point_value = 8;
+    ArrayValue array_value = 9;
+    MapValue map_value = 6;
+  }
+}
+
+// google.type.LatLng
+message LatLng {
+  double latitude = 1;
+  double longitude = 2;
+}
+
+message ArrayValue {
+  repeated Value values = 1;
+}
+
+message MapValue {
+  map<string, Value> fields = 1;
+}

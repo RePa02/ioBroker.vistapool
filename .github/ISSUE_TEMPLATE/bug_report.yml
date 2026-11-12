@@ -1,0 +1,40 @@
+name: Bug report
+description: Something does not work as expected
+labels: ['bug']
+body:
+    - type: markdown
+      attributes:
+          value: |
+              Thanks for reporting! Please remove e-mail addresses, pool IDs, gateway IDs and tokens from logs before posting.
+    - type: textarea
+      id: problem
+      attributes:
+          label: What happened and what did you expect?
+      validations:
+          required: true
+    - type: input
+      id: controller
+      attributes:
+          label: Controller model / modules
+          description: e.g. Hayward AquaRite+ with pH and redox, Sugar Valley Oxilife, variable speed pump, backwash
+      validations:
+          required: true
+    - type: textarea
+      id: log
+      attributes:
+          label: Debug log
+          description: Set the instance log level to debug and copy the relevant lines (especially those with sendPoolCommand)
+          render: text
+    - type: textarea
+      id: discovery
+      attributes:
+          label: Anonymised discovery output (optional)
+          description: Output of tools/discovery (it removes personal data) or relevant raw.* states
+          render: json
+    - type: input
+      id: versions
+      attributes:
+          label: Versions
+          description: Adapter, js-controller, admin, Node.js
+      validations:
+          required: true

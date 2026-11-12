@@ -1,0 +1,213 @@
+{
+    "common": {
+        "name": "vistapool",
+        "version": "0.3.0",
+        "news": {
+            "0.3.0": {
+                "en": "Push updates instead of polling; commands are merged and rate limited; status states for online, pending commands and last command; automatic clock sync (drift and daylight saving time); back-off on cloud errors; English texts",
+                "de": "Push-Aktualisierung statt Polling; Befehle werden gebündelt und begrenzt; Status-Datenpunkte für Online, offene Befehle und letzten Befehl; automatische Uhrzeit-Synchronisation (Abweichung und Sommerzeit); Backoff bei Cloud-Fehlern; englische Texte",
+                "ru": "Push-обновления вместо опроса; команды объединяются и ограничиваются; состояния для онлайн, ожидающих и последней команды; автоматическая синхронизация часов (отклонение и летнее время); пауза при ошибках облака; английские тексты",
+                "pt": "Atualizações push em vez de consulta; comandos agrupados e limitados; estados para online, comandos pendentes e último comando; sincronização automática do relógio (desvio e horário de verão); espera progressiva em erros da nuvem; textos em inglês",
+                "nl": "Push-updates in plaats van polling; opdrachten worden gebundeld en begrensd; statussen voor online, openstaande en laatste opdracht; automatische kloksynchronisatie (afwijking en zomertijd); back-off bij cloudfouten; Engelse teksten",
+                "fr": "Mises à jour push au lieu du polling ; commandes regroupées et limitées ; états pour en ligne, commandes en attente et dernière commande ; synchronisation automatique de l'horloge (dérive et heure d'été) ; temporisation en cas d'erreurs du cloud ; textes en anglais",
+                "it": "Aggiornamenti push invece del polling; comandi raggruppati e limitati; stati per online, comandi in sospeso e ultimo comando; sincronizzazione automatica dell'orologio (deriva e ora legale); attesa progressiva sugli errori del cloud; testi in inglese",
+                "es": "Actualizaciones push en lugar de sondeo; comandos agrupados y limitados; estados de conexión, comandos pendientes y último comando; sincronización automática del reloj (desviación y horario de verano); espera progresiva ante errores de la nube; textos en inglés",
+                "pl": "Aktualizacje push zamiast odpytywania; polecenia są łączone i ograniczane; stany online, oczekujących i ostatniego polecenia; automatyczna synchronizacja zegara (odchyłka i czas letni); wycofanie przy błędach chmury; teksty angielskie",
+                "uk": "Push-оновлення замість опитування; команди об'єднуються та обмежуються; стани онлайн, очікуваних і останньої команди; автоматична синхронізація годинника (відхилення та літній час); пауза при помилках хмари; англійські тексти",
+                "zh-cn": "使用推送更新代替轮询；命令合并并限速；在线、待确认命令和最后命令的状态；自动时钟同步（偏差和夏令时）；云错误时退避；英文文本"
+            },
+            "0.2.2": {
+                "en": "Unconfirmed commands expire after a configurable time instead of firing late; current state is read right before every command; ignored commands are not repeated",
+                "de": "Unbestätigte Befehle verfallen nach einstellbarer Zeit statt verspätet zu schalten; vor jedem Befehl wird der aktuelle Stand gelesen; ignorierte Befehle werden nicht wiederholt",
+                "ru": "Неподтверждённые команды истекают через заданное время; перед каждой командой читается текущее состояние; игнорируемые команды не повторяются",
+                "pt": "Comandos não confirmados expiram após um tempo configurável; o estado atual é lido antes de cada comando; comandos ignorados não são repetidos",
+                "nl": "Onbevestigde opdrachten verlopen na een instelbare tijd; vóór elke opdracht wordt de actuele status gelezen; genegeerde opdrachten worden niet herhaald",
+                "fr": "Les commandes non confirmées expirent après un délai réglable ; l'état actuel est lu avant chaque commande ; les commandes ignorées ne sont pas répétées",
+                "it": "I comandi non confermati scadono dopo un tempo configurabile; lo stato attuale viene letto prima di ogni comando; i comandi ignorati non vengono ripetuti",
+                "es": "Los comandos no confirmados caducan tras un tiempo configurable; se lee el estado actual antes de cada comando; los comandos ignorados no se repiten",
+                "pl": "Niepotwierdzone polecenia wygasają po ustawionym czasie; przed każdym poleceniem odczytywany jest bieżący stan; ignorowane polecenia nie są powtarzane",
+                "uk": "Непідтверджені команди спливають через заданий час; перед кожною командою зчитується поточний стан; проігноровані команди не повторюються",
+                "zh-cn": "未确认的命令在可配置时间后失效；每个命令前读取当前状态；被忽略的命令不再重复"
+            },
+            "0.2.1": {
+                "en": "Commands are confirmed and repeated if the controller was offline; relay display follows immediately; hints when switching in auto mode",
+                "de": "Befehle werden bestätigt und wiederholt, wenn die Steuerung offline war; Relais-Anzeige folgt sofort; Hinweise beim Schalten im Auto-Modus",
+                "ru": "Команды подтверждаются и повторяются, если контроллер был офлайн; реле отображаются сразу; подсказки при переключении в авто-режиме",
+                "pt": "Comandos são confirmados e repetidos se o controlador estava offline; relés atualizam imediatamente; avisos ao comutar em modo automático",
+                "nl": "Opdrachten worden bevestigd en herhaald als de controller offline was; relais tonen direct; hints bij schakelen in automatische modus",
+                "fr": "Les commandes sont confirmées et répétées si le contrôleur était hors ligne ; affichage des relais immédiat ; conseils en mode auto",
+                "it": "I comandi vengono confermati e ripetuti se il controller era offline; i relè si aggiornano subito; suggerimenti in modalità automatica",
+                "es": "Los comandos se confirman y repiten si el controlador estaba sin conexión; los relés se actualizan al instante; avisos en modo automático",
+                "pl": "Polecenia są potwierdzane i powtarzane, gdy sterownik był offline; przekaźniki aktualizują się od razu; wskazówki w trybie auto",
+                "uk": "Команди підтверджуються та повторюються, якщо контролер був офлайн; реле відображаються одразу; підказки в авто-режимі",
+                "zh-cn": "命令会被确认，控制器离线时会重发；继电器显示立即更新；自动模式下切换时给出提示"
+            },
+            "0.2.0": {
+                "en": "Instance settings page: edit pump, heating, light, relays, water care and backwash like in the Vistapool web app",
+                "de": "Instanz-Seite: Pumpe, Heizung, Licht, Relais, Wasserpflege und Rückspülung wie in der Vistapool-Web-App einstellen",
+                "ru": "Страница настроек: насос, нагрев, свет, реле, уход за водой и обратная промывка как в веб-приложении Vistapool",
+                "pt": "Página de configuração: bomba, aquecimento, luz, relés, tratamento da água e retrolavagem como na aplicação web Vistapool",
+                "nl": "Instellingenpagina: pomp, verwarming, licht, relais, waterbehandeling en terugspoelen zoals in de Vistapool-webapp",
+                "fr": "Page de configuration : pompe, chauffage, éclairage, relais, traitement de l'eau et contre-lavage comme dans l'application web Vistapool",
+                "it": "Pagina impostazioni: pompa, riscaldamento, luce, relè, trattamento acqua e controlavaggio come nell'app web Vistapool",
+                "es": "Página de configuración: bomba, calefacción, luz, relés, tratamiento del agua y contralavado como en la aplicación web Vistapool",
+                "pl": "Strona ustawień: pompa, ogrzewanie, światło, przekaźniki, uzdatnianie wody i płukanie wsteczne jak w aplikacji Vistapool",
+                "uk": "Сторінка налаштувань: насос, нагрів, світло, реле, догляд за водою та зворотне промивання як у веб-застосунку Vistapool",
+                "zh-cn": "实例设置页面：像 Vistapool 网页应用一样设置水泵、加热、灯光、继电器、水处理和反冲洗"
+            },
+            "0.1.0": {
+                "en": "Initial test release: read all data points, control filtration, heating, light, relays and setpoints",
+                "de": "Erste Testversion: alle Datenpunkte lesen, Filtration, Heizung, Licht, Relais und Sollwerte steuern",
+                "ru": "Первая тестовая версия: чтение всех точек данных, управление фильтрацией, нагревом, светом, реле и уставками",
+                "pt": "Primeira versão de teste: ler todos os pontos de dados, controlar filtração, aquecimento, luz, relés e valores-alvo",
+                "nl": "Eerste testversie: alle datapunten lezen, filtratie, verwarming, licht, relais en setpoints bedienen",
+                "fr": "Première version de test : lecture de tous les points de données, commande de la filtration, du chauffage, de l'éclairage, des relais et des consignes",
+                "it": "Prima versione di prova: lettura di tutti i punti dati, controllo di filtrazione, riscaldamento, luce, relè e valori nominali",
+                "es": "Primera versión de prueba: leer todos los puntos de datos, controlar filtración, calefacción, luz, relés y consignas",
+                "pl": "Pierwsza wersja testowa: odczyt wszystkich punktów danych, sterowanie filtracją, ogrzewaniem, światłem, przekaźnikami i nastawami",
+                "uk": "Перша тестова версія: читання всіх точок даних, керування фільтрацією, нагрівом, світлом, реле та уставками",
+                "zh-cn": "首个测试版本：读取所有数据点，控制过滤、加热、灯光、继电器和设定值"
+            }
+        },
+        "titleLang": {
+            "en": "Vistapool (Hayward AquaRite, Sugar Valley, Oxilife)",
+            "de": "Vistapool (Hayward AquaRite, Sugar Valley, Oxilife)",
+            "ru": "Vistapool (Hayward AquaRite, Sugar Valley, Oxilife)",
+            "pt": "Vistapool (Hayward AquaRite, Sugar Valley, Oxilife)",
+            "nl": "Vistapool (Hayward AquaRite, Sugar Valley, Oxilife)",
+            "fr": "Vistapool (Hayward AquaRite, Sugar Valley, Oxilife)",
+            "it": "Vistapool (Hayward AquaRite, Sugar Valley, Oxilife)",
+            "es": "Vistapool (Hayward AquaRite, Sugar Valley, Oxilife)",
+            "pl": "Vistapool (Hayward AquaRite, Sugar Valley, Oxilife)",
+            "uk": "Vistapool (Hayward AquaRite, Sugar Valley, Oxilife)",
+            "zh-cn": "Vistapool (Hayward AquaRite, Sugar Valley, Oxilife)"
+        },
+        "desc": {
+            "en": "Cloud connection for Vistapool, Hayward AquaRite and Sugar Valley pool controllers",
+            "de": "Cloud-Anbindung für Vistapool-, Hayward-AquaRite- und Sugar-Valley-Poolsteuerungen",
+            "ru": "Облачное подключение для контроллеров бассейнов Vistapool, Hayward AquaRite и Sugar Valley",
+            "pt": "Ligação à nuvem para controladores de piscina Vistapool, Hayward AquaRite e Sugar Valley",
+            "nl": "Cloudverbinding voor Vistapool-, Hayward AquaRite- en Sugar Valley-zwembadcontrollers",
+            "fr": "Connexion cloud pour les contrôleurs de piscine Vistapool, Hayward AquaRite et Sugar Valley",
+            "it": "Connessione cloud per i controller per piscine Vistapool, Hayward AquaRite e Sugar Valley",
+            "es": "Conexión en la nube para controladores de piscina Vistapool, Hayward AquaRite y Sugar Valley",
+            "pl": "Połączenie z chmurą dla sterowników basenowych Vistapool, Hayward AquaRite i Sugar Valley",
+            "uk": "Хмарне підключення для контролерів басейнів Vistapool, Hayward AquaRite і Sugar Valley",
+            "zh-cn": "Vistapool、Hayward AquaRite 和 Sugar Valley 泳池控制器的云连接"
+        },
+        "authors": [
+            "René Paul <github@news-flash.org>"
+        ],
+        "keywords": [
+            "vistapool",
+            "hayward",
+            "aquarite",
+            "sugar valley",
+            "oxilife",
+            "hidrolife",
+            "kripsol",
+            "dagen",
+            "poolwatch",
+            "pool"
+        ],
+        "platform": "Javascript/Node.js",
+        "icon": "vistapool.png",
+        "extIcon": "https://raw.githubusercontent.com/RePa02/ioBroker.vistapool/main/admin/vistapool.png",
+        "readme": "https://github.com/RePa02/ioBroker.vistapool/blob/main/README.md",
+        "loglevel": "info",
+        "mode": "daemon",
+        "type": "climate-control",
+        "compact": true,
+        "connectionType": "cloud",
+        "dataSource": "push",
+        "adminUI": {
+            "config": "json"
+        },
+        "enabled": true,
+        "tier": 3,
+        "dependencies": [
+            {
+                "js-controller": ">=6.0.11"
+            }
+        ],
+        "globalDependencies": [
+            {
+                "admin": ">=7.6.20"
+            }
+        ],
+        "messagebox": true,
+        "licenseInformation": {
+            "type": "free",
+            "license": "MIT"
+        }
+    },
+    "native": {
+        "email": "",
+        "password": "",
+        "pollInterval": 30,
+        "rawMirror": false,
+        "poolId": "",
+        "relayUse1": "",
+        "relayUse2": "",
+        "relayUse3": "",
+        "relayUse4": "",
+        "boostPauseControl": true,
+        "commandMaxAge": 10,
+        "push": true,
+        "clockSync": true,
+        "clockMaxDrift": 3,
+        "timeZone": ""
+    },
+    "encryptedNative": [
+        "password"
+    ],
+    "protectedNative": [
+        "password"
+    ],
+    "objects": [],
+    "instanceObjects": [
+        {
+            "_id": "info",
+            "type": "channel",
+            "common": {
+                "name": {
+                    "en": "Information",
+                    "de": "Information"
+                }
+            },
+            "native": {}
+        },
+        {
+            "_id": "info.connection",
+            "type": "state",
+            "common": {
+                "role": "indicator.connected",
+                "name": {
+                    "en": "Connected to cloud",
+                    "de": "Mit Cloud verbunden"
+                },
+                "type": "boolean",
+                "read": true,
+                "write": false,
+                "def": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "info.push",
+            "type": "state",
+            "common": {
+                "role": "indicator.connected",
+                "name": {
+                    "en": "Push updates active",
+                    "de": "Push-Aktualisierung aktiv"
+                },
+                "type": "boolean",
+                "read": true,
+                "write": false,
+                "def": false
+            },
+            "native": {}
+        }
+    ]
+}

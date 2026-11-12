@@ -1,0 +1,5068 @@
+{
+  "type": "tabs",
+  "i18n": false,
+  "items": {
+    "tabConnection": {
+      "type": "panel",
+      "label": {
+        "de": "Verbindung",
+        "en": "Connection"
+      },
+      "items": {
+        "_alive": {
+          "type": "alive",
+          "newLine": true,
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
+        },
+        "_hdrAccount": {
+          "type": "header",
+          "text": {
+            "de": "Vistapool-Konto",
+            "en": "Vistapool account"
+          },
+          "size": 3,
+          "newLine": true
+        },
+        "email": {
+          "type": "text",
+          "label": {
+            "de": "E-Mail",
+            "en": "E-Mail"
+          },
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4,
+          "newLine": true,
+          "help": {
+            "de": "Wie in der Vistapool-App bzw. auf hayward-europe.web.app",
+            "en": "Same as in the Vistapool app"
+          }
+        },
+        "password": {
+          "type": "password",
+          "label": {
+            "de": "Passwort",
+            "en": "Password"
+          },
+          "visible": true,
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4
+        },
+        "_test": {
+          "type": "sendTo",
+          "command": "testConnection",
+          "jsonData": "{\"email\":\"${data.email}\",\"password\":\"${data.password}\"}",
+          "label": {
+            "de": "Verbindung testen",
+            "en": "Test connection"
+          },
+          "icon": "auth",
+          "variant": "outlined",
+          "showProcess": true,
+          "timeout": 30000,
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4,
+          "newLine": true,
+          "disabled": "!_alive",
+          "help": {
+            "de": "Funktioniert auch vor dem Speichern.",
+            "en": "Works before saving, too."
+          }
+        },
+        "_hdrPoll": {
+          "type": "header",
+          "text": {
+            "de": "Aktualisierung",
+            "en": "Updates"
+          },
+          "size": 3,
+          "newLine": true
+        },
+        "push": {
+          "type": "checkbox",
+          "label": {
+            "de": "Push-Aktualisierung (empfohlen)",
+            "en": "Push updates (recommended)"
+          },
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4,
+          "newLine": true,
+          "help": {
+            "de": "Änderungen kommen sofort, wie in der Vistapool-App. Fällt Push aus, fragt der Adapter automatisch im Intervall ab.",
+            "en": "Changes arrive immediately, like in the Vistapool app. If push fails, the adapter polls automatically."
+          }
+        },
+        "pollInterval": {
+          "type": "number",
+          "label": {
+            "de": "Abfrageintervall ohne Push",
+            "en": "Poll interval without push"
+          },
+          "unit": "s",
+          "min": 15,
+          "max": 3600,
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4,
+          "help": {
+            "de": "Nur ohne Push. Mit Push wird zur Sicherheit alle 15 Minuten gelesen.",
+            "en": "Only without push. With push the adapter reads every 15 minutes as a safety net."
+          }
+        },
+        "commandMaxAge": {
+          "type": "number",
+          "label": {
+            "de": "Unbestätigte Befehle verwerfen nach",
+            "en": "Discard unconfirmed commands after"
+          },
+          "unit": "min",
+          "min": 0,
+          "max": 1440,
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4,
+          "newLine": true,
+          "help": {
+            "de": "Ist die Anlage offline (z. B. schlechtes WLAN), wird ein Befehl nach ihrer Rückkehr erneut gesendet – aber nur, wenn er nicht älter ist. 0 = immer nachsenden.",
+            "en": "Commands are re-sent when the controller is back online, unless older than this. 0 = always."
+          }
+        },
+        "rawMirror": {
+          "type": "checkbox",
+          "label": {
+            "de": "Rohdaten unter raw.* anlegen (Diagnose)",
+            "en": "Mirror raw fields to raw.* (diagnostics)"
+          },
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4,
+          "help": {
+            "de": "Jedes Feld der Cloud ungefiltert als Objekt – nur zur Fehlersuche, enthält kurzzeitige Fehlwerte.",
+            "en": "Every cloud field unfiltered – for troubleshooting only, contains transient garbage values."
+          }
+        },
+        "_hdrClock": {
+          "type": "header",
+          "text": {
+            "de": "Uhrzeit der Steuerung",
+            "en": "Controller clock"
+          },
+          "size": 3,
+          "newLine": true
+        },
+        "clockSync": {
+          "type": "checkbox",
+          "label": {
+            "de": "Uhrzeit automatisch synchronisieren",
+            "en": "Sync clock automatically"
+          },
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4,
+          "newLine": true,
+          "help": {
+            "de": "Die Uhr der Steuerung driftet und kennt keine Sommerzeit. Zeitfenster laufen sonst versetzt.",
+            "en": "The controller clock drifts and ignores daylight saving time; schedules would run off."
+          }
+        },
+        "clockMaxDrift": {
+          "type": "number",
+          "label": {
+            "de": "Synchronisieren ab Abweichung von",
+            "en": "Sync when deviation exceeds"
+          },
+          "unit": "min",
+          "min": 1,
+          "max": 120,
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4,
+          "hidden": "!data.clockSync"
+        },
+        "timeZone": {
+          "type": "text",
+          "label": {
+            "de": "Zeitzone der Anlage",
+            "en": "Time zone of the pool"
+          },
+          "placeholder": "Europe/Berlin",
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4,
+          "help": {
+            "de": "Leer = Zeitzone des ioBroker-Servers. Nötig, wenn ioBroker in UTC läuft (z. B. Docker ohne TZ).",
+            "en": "Empty = time zone of the ioBroker host. Required if ioBroker runs in UTC (e.g. Docker without TZ)."
+          }
+        }
+      }
+    },
+    "tabPool": {
+      "type": "panel",
+      "label": {
+        "de": "Anlage",
+        "en": "Pool"
+      },
+      "items": {
+        "_howto": {
+          "type": "infoBox",
+          "boxType": "info",
+          "closed": false,
+          "newLine": true,
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12,
+          "title": {
+            "de": "So funktionieren die Anlagen-Tabs",
+            "en": "How the pool tabs work"
+          },
+          "text": {
+            "de": "Die Tabs „Pumpe & Heizung“, „Licht“, „Relais“, „Wasserpflege“ und „Rückspülung“ zeigen die aktuellen Einstellungen deiner Poolsteuerung – dieselben wie in der Vistapool-App. Jeder Tab hat einen eigenen Knopf „An Anlage senden“. Übertragen werden nur Werte, die du geändert hast.",
+            "en": "The pool tabs show the current controller settings. Each tab has its own “Send to pool” button; only changed values are sent."
+          }
+        },
+        "poolId": {
+          "type": "selectSendTo",
+          "command": "getPools",
+          "label": {
+            "de": "Pool",
+            "en": "Pool"
+          },
+          "noTranslation": true,
+          "manual": false,
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4,
+          "newLine": true,
+          "help": {
+            "de": "Bei mehreren Pools im Konto: welcher Pool hier bearbeitet wird.",
+            "en": "If the account has several pools: which pool to edit."
+          }
+        },
+        "_load": {
+          "type": "sendTo",
+          "command": "loadSettings",
+          "jsonData": "{\"poolId\":\"${data.poolId}\"}",
+          "onLoaded": true,
+          "useNative": true,
+          "showProcess": true,
+          "timeout": 30000,
+          "label": {
+            "de": "Einstellungen von der Anlage laden",
+            "en": "Load settings from pool"
+          },
+          "icon": "refresh",
+          "variant": "outlined",
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4,
+          "disabled": "!_alive",
+          "help": {
+            "de": "Passiert beim Öffnen automatisch. Erneut laden, wenn du parallel in der App etwas geändert hast.",
+            "en": "Runs automatically on open."
+          }
+        },
+        "_notAlive": {
+          "type": "infoBox",
+          "boxType": "warning",
+          "closeable": false,
+          "newLine": true,
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12,
+          "hidden": "_alive",
+          "title": {
+            "de": "Instanz läuft nicht",
+            "en": "Instance not running"
+          },
+          "text": {
+            "de": "Starte die Instanz (und trage im Tab „Verbindung“ deine Zugangsdaten ein), damit diese Seite die Einstellungen der Anlage anzeigen kann.",
+            "en": "Start the instance so this page can show the pool settings."
+          }
+        },
+        "_equipHdr": {
+          "type": "header",
+          "text": {
+            "de": "Ausstattung",
+            "en": "Equipment"
+          },
+          "size": 4,
+          "newLine": true,
+          "hidden": "(!data.x_loaded)"
+        },
+        "x_online": {
+          "doNotSave": true,
+          "type": "checkbox",
+          "label": {
+            "de": "Steuerung online",
+            "en": "Controller online"
+          },
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4,
+          "disabled": "true",
+          "hidden": "(!data.x_loaded)"
+        },
+        "x_hasHidro": {
+          "doNotSave": true,
+          "type": "checkbox",
+          "label": {
+            "de": "Hydrolyse / Elektrolyse",
+            "en": "Hydrolysis / electrolysis"
+          },
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4,
+          "disabled": "true",
+          "hidden": "(!data.x_loaded)"
+        },
+        "x_hasPH": {
+          "doNotSave": true,
+          "type": "checkbox",
+          "label": {
+            "de": "pH-Regelung",
+            "en": "pH control"
+          },
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4,
+          "disabled": "true",
+          "hidden": "(!data.x_loaded)"
+        },
+        "x_hasRX": {
+          "doNotSave": true,
+          "type": "checkbox",
+          "label": {
+            "de": "Redox-Regelung",
+            "en": "Redox control"
+          },
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4,
+          "disabled": "true",
+          "hidden": "(!data.x_loaded)"
+        },
+        "x_hasCL": {
+          "doNotSave": true,
+          "type": "checkbox",
+          "label": {
+            "de": "Chlor-Messung",
+            "en": "Chlorine probe"
+          },
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4,
+          "disabled": "true",
+          "hidden": "(!data.x_loaded)"
+        },
+        "x_vsp": {
+          "doNotSave": true,
+          "type": "checkbox",
+          "label": {
+            "de": "Drehzahlgeregelte Pumpe",
+            "en": "Variable speed pump"
+          },
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4,
+          "disabled": "true",
+          "hidden": "(!data.x_loaded)"
+        },
+        "x_hasSmart": {
+          "doNotSave": true,
+          "type": "checkbox",
+          "label": {
+            "de": "Modus Smart verfügbar",
+            "en": "Smart mode available"
+          },
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4,
+          "disabled": "true",
+          "hidden": "(!data.x_loaded)"
+        },
+        "x_hasBackwash": {
+          "doNotSave": true,
+          "type": "checkbox",
+          "label": {
+            "de": "Rückspülung",
+            "en": "Backwash"
+          },
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4,
+          "disabled": "true",
+          "hidden": "(!data.x_loaded)"
+        },
+        "_heatHdr": {
+          "type": "header",
+          "text": {
+            "de": "Wo hängt was?",
+            "en": "What is connected where?"
+          },
+          "size": 4,
+          "newLine": true,
+          "hidden": "(!data.x_loaded)"
+        },
+        "_heatInfo": {
+          "type": "staticText",
+          "text": {
+            "de": "Heizung/Wärmepumpe: Die Steuerung hat dafür einen eigenen Heizungsausgang. Er schaltet im Pumpenmodus „Heizen“ abhängig von der Wassertemperatur (Tab „Pumpe & Heizung“). Hängt deine Wärmepumpe stattdessen an einem AUX-Relais, ordne sie im Tab „Relais“ zu.",
+            "en": "Heating has its own output that switches in “Heat” mode. If your heat pump is wired to an AUX relay, assign it in the “Relays” tab."
+          },
+          "newLine": true,
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12,
+          "style": {
+            "opacity": 0.75,
+            "fontSize": 13
+          },
+          "hidden": "(!data.x_loaded)"
+        },
+        "_hidroInfo": {
+          "type": "staticText",
+          "text": {
+            "de": "Hydrolyse/Elektrolyse: Produktion, Abdeckung und Boost stellst du im Tab „Wasserpflege“ ein.",
+            "en": "Hydrolysis/electrolysis settings are in the “Water care” tab."
+          },
+          "newLine": true,
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12,
+          "style": {
+            "opacity": 0.75,
+            "fontSize": 13
+          },
+          "hidden": "(!data.x_loaded) || (!data.x_hasHidro)"
+        },
+        "_clockHdr": {
+          "type": "header",
+          "text": {
+            "de": "Uhrzeit der Steuerung",
+            "en": "Controller clock"
+          },
+          "size": 4,
+          "newLine": true,
+          "hidden": "(!data.x_loaded)"
+        },
+        "_sync": {
+          "type": "sendTo",
+          "command": "syncTime",
+          "jsonData": "{\"poolId\":\"${data.poolId}\"}",
+          "label": {
+            "de": "Uhrzeit jetzt synchronisieren",
+            "en": "Sync clock now"
+          },
+          "icon": "send",
+          "variant": "outlined",
+          "showProcess": true,
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4,
+          "newLine": true,
+          "hidden": "!data.x_loaded",
+          "help": {
+            "de": "Zeitfenster laufen nach der Uhr der Steuerung. Die automatische Synchronisation stellst du im Tab „Verbindung“ ein.",
+            "en": "Schedules run on the controller clock. Automatic sync is configured in the “Connection” tab."
+          }
+        }
+      }
+    },
+    "tabFiltration": {
+      "type": "panel",
+      "label": {
+        "de": "Pumpe & Heizung",
+        "en": "Pump & heating"
+      },
+      "items": {
+        "_nl": {
+          "type": "infoBox",
+          "boxType": "info",
+          "closeable": false,
+          "title": {
+            "de": "Noch keine Daten von der Anlage",
+            "en": "No data from the pool yet"
+          },
+          "text": {
+            "de": "Öffne zuerst den Tab „Anlage“ und lade die Einstellungen. Die Instanz muss dafür laufen und mit deinem Vistapool-Konto verbunden sein.",
+            "en": "Open the “Pool” tab first and load the settings. The instance must be running and connected."
+          },
+          "hidden": "data.x_loaded",
+          "newLine": true,
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
+        },
+        "_autoload": {
+          "type": "sendTo",
+          "command": "loadSettings",
+          "jsonData": "{\"poolId\":\"${data.poolId}\"}",
+          "onLoaded": true,
+          "useNative": true,
+          "showProcess": true,
+          "timeout": 30000,
+          "label": {
+            "de": "Einstellungen von der Anlage laden",
+            "en": "Load settings from pool"
+          },
+          "icon": "refresh",
+          "variant": "outlined",
+          "newLine": true,
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4,
+          "hidden": "data.x_loaded || !_alive"
+        },
+        "d_f_mode": {
+          "doNotSave": true,
+          "type": "select",
+          "format": "radio",
+          "horizontal": true,
+          "label": {
+            "de": "Pumpenmodus",
+            "en": "Pump mode"
+          },
+          "options": [
+            {
+              "value": 0,
+              "label": {
+                "de": "Manuell",
+                "en": "Manual"
+              },
+              "description": {
+                "de": "Pumpe von Hand ein/aus",
+                "en": "Pump on/off by hand"
+              }
+            },
+            {
+              "value": 1,
+              "label": {
+                "de": "Auto",
+                "en": "Auto"
+              },
+              "description": {
+                "de": "Nach Zeitfenstern",
+                "en": "By time windows"
+              }
+            },
+            {
+              "value": 2,
+              "label": {
+                "de": "Heizen",
+                "en": "Heat"
+              },
+              "hidden": "!data.x_hasHeat",
+              "description": {
+                "de": "Zeitfenster + Heizung nach Temperatur",
+                "en": "Time windows + heating by temperature"
+              }
+            },
+            {
+              "value": 3,
+              "label": {
+                "de": "Smart",
+                "en": "Smart"
+              },
+              "hidden": "!data.x_hasSmart",
+              "description": {
+                "de": "Laufzeit passt sich der Temperatur an",
+                "en": "Run time adapts to the temperature"
+              }
+            },
+            {
+              "value": 4,
+              "label": {
+                "de": "Intel",
+                "en": "Intel"
+              },
+              "description": {
+                "de": "Filterstunden pro Tag",
+                "en": "Filtration hours per day"
+              }
+            }
+          ],
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12,
+          "newLine": true,
+          "hidden": "(!data.x_loaded)"
+        },
+        "d_showAll": {
+          "doNotSave": true,
+          "type": "checkbox",
+          "label": {
+            "de": "Einstellungen aller Modi anzeigen",
+            "en": "Show settings of all modes"
+          },
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4,
+          "newLine": true,
+          "help": {
+            "de": "Sonst siehst du nur die Felder des gewählten Modus.",
+            "en": "Otherwise only the selected mode is shown."
+          },
+          "hidden": "(!data.x_loaded)"
+        },
+        "_hManual": {
+          "type": "header",
+          "text": {
+            "de": "Manuell",
+            "en": "Manual"
+          },
+          "size": 4,
+          "newLine": true,
+          "hidden": "(!data.x_loaded) || (data.d_f_mode !== 0 && !data.d_showAll)"
+        },
+        "d_f_status": {
+          "doNotSave": true,
+          "type": "checkbox",
+          "label": {
+            "de": "Pumpe läuft",
+            "en": "Pump running"
+          },
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4,
+          "hidden": "(!data.x_loaded) || (data.d_f_mode !== 0 && !data.d_showAll)",
+          "newLine": true
+        },
+        "d_f_speed": {
+          "doNotSave": true,
+          "type": "select",
+          "label": {
+            "de": "Drehzahl",
+            "en": "Speed"
+          },
+          "options": [
+            {
+              "value": 0,
+              "label": {
+                "de": "langsam",
+                "en": "slow"
+              }
+            },
+            {
+              "value": 1,
+              "label": {
+                "de": "mittel",
+                "en": "medium"
+              }
+            },
+            {
+              "value": 2,
+              "label": {
+                "de": "hoch",
+                "en": "high"
+              }
+            }
+          ],
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || ((data.d_f_mode !== 0 && !data.d_showAll) || (!data.x_vsp))"
+        },
+        "_hTimes": {
+          "type": "header",
+          "text": {
+            "de": "Zeitfenster",
+            "en": "Time windows"
+          },
+          "size": 4,
+          "newLine": true,
+          "hidden": "(!data.x_loaded) || (![1,2,3].includes(data.d_f_mode) && !data.d_showAll)"
+        },
+        "_tInfo": {
+          "type": "staticText",
+          "text": {
+            "de": "Gleiche Start- und Endzeit (z. B. 00:00–00:00) bedeutet: Zeitfenster aus. Gilt in den Modi Auto, Heizen und Smart.",
+            "en": "Same start and end time = window off."
+          },
+          "newLine": true,
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12,
+          "style": {
+            "opacity": 0.75,
+            "fontSize": 13
+          },
+          "hidden": "(!data.x_loaded) || (![1,2,3].includes(data.d_f_mode) && !data.d_showAll)"
+        },
+        "d_f_i1from": {
+          "doNotSave": true,
+          "type": "timePicker",
+          "label": {
+            "de": "Fenster 1 von",
+            "en": "Window 1 from"
+          },
+          "returnFormat": "HH:mm:ss",
+          "format": "HH:mm",
+          "views": [
+            "hours",
+            "minutes"
+          ],
+          "timeSteps": {
+            "hours": 1,
+            "minutes": 5
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || (![1,2,3].includes(data.d_f_mode) && !data.d_showAll)",
+          "newLine": true
+        },
+        "d_f_i1to": {
+          "doNotSave": true,
+          "type": "timePicker",
+          "label": {
+            "de": "bis",
+            "en": "to"
+          },
+          "returnFormat": "HH:mm:ss",
+          "format": "HH:mm",
+          "views": [
+            "hours",
+            "minutes"
+          ],
+          "timeSteps": {
+            "hours": 1,
+            "minutes": 5
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || (![1,2,3].includes(data.d_f_mode) && !data.d_showAll)"
+        },
+        "d_f_i1speed": {
+          "doNotSave": true,
+          "type": "select",
+          "label": {
+            "de": "Drehzahl",
+            "en": "Speed"
+          },
+          "options": [
+            {
+              "value": 0,
+              "label": {
+                "de": "langsam",
+                "en": "slow"
+              }
+            },
+            {
+              "value": 1,
+              "label": {
+                "de": "mittel",
+                "en": "medium"
+              }
+            },
+            {
+              "value": 2,
+              "label": {
+                "de": "hoch",
+                "en": "high"
+              }
+            }
+          ],
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || ((![1,2,3].includes(data.d_f_mode) && !data.d_showAll) || (!data.x_vsp))"
+        },
+        "d_f_i2from": {
+          "doNotSave": true,
+          "type": "timePicker",
+          "label": {
+            "de": "Fenster 2 von",
+            "en": "Window 2 from"
+          },
+          "returnFormat": "HH:mm:ss",
+          "format": "HH:mm",
+          "views": [
+            "hours",
+            "minutes"
+          ],
+          "timeSteps": {
+            "hours": 1,
+            "minutes": 5
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || (![1,2,3].includes(data.d_f_mode) && !data.d_showAll)",
+          "newLine": true
+        },
+        "d_f_i2to": {
+          "doNotSave": true,
+          "type": "timePicker",
+          "label": {
+            "de": "bis",
+            "en": "to"
+          },
+          "returnFormat": "HH:mm:ss",
+          "format": "HH:mm",
+          "views": [
+            "hours",
+            "minutes"
+          ],
+          "timeSteps": {
+            "hours": 1,
+            "minutes": 5
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || (![1,2,3].includes(data.d_f_mode) && !data.d_showAll)"
+        },
+        "d_f_i2speed": {
+          "doNotSave": true,
+          "type": "select",
+          "label": {
+            "de": "Drehzahl",
+            "en": "Speed"
+          },
+          "options": [
+            {
+              "value": 0,
+              "label": {
+                "de": "langsam",
+                "en": "slow"
+              }
+            },
+            {
+              "value": 1,
+              "label": {
+                "de": "mittel",
+                "en": "medium"
+              }
+            },
+            {
+              "value": 2,
+              "label": {
+                "de": "hoch",
+                "en": "high"
+              }
+            }
+          ],
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || ((![1,2,3].includes(data.d_f_mode) && !data.d_showAll) || (!data.x_vsp))"
+        },
+        "d_f_i3from": {
+          "doNotSave": true,
+          "type": "timePicker",
+          "label": {
+            "de": "Fenster 3 von",
+            "en": "Window 3 from"
+          },
+          "returnFormat": "HH:mm:ss",
+          "format": "HH:mm",
+          "views": [
+            "hours",
+            "minutes"
+          ],
+          "timeSteps": {
+            "hours": 1,
+            "minutes": 5
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || (![1,2,3].includes(data.d_f_mode) && !data.d_showAll)",
+          "newLine": true
+        },
+        "d_f_i3to": {
+          "doNotSave": true,
+          "type": "timePicker",
+          "label": {
+            "de": "bis",
+            "en": "to"
+          },
+          "returnFormat": "HH:mm:ss",
+          "format": "HH:mm",
+          "views": [
+            "hours",
+            "minutes"
+          ],
+          "timeSteps": {
+            "hours": 1,
+            "minutes": 5
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || (![1,2,3].includes(data.d_f_mode) && !data.d_showAll)"
+        },
+        "d_f_i3speed": {
+          "doNotSave": true,
+          "type": "select",
+          "label": {
+            "de": "Drehzahl",
+            "en": "Speed"
+          },
+          "options": [
+            {
+              "value": 0,
+              "label": {
+                "de": "langsam",
+                "en": "slow"
+              }
+            },
+            {
+              "value": 1,
+              "label": {
+                "de": "mittel",
+                "en": "medium"
+              }
+            },
+            {
+              "value": 2,
+              "label": {
+                "de": "hoch",
+                "en": "high"
+              }
+            }
+          ],
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || ((![1,2,3].includes(data.d_f_mode) && !data.d_showAll) || (!data.x_vsp))"
+        },
+        "_hHeat": {
+          "type": "header",
+          "text": {
+            "de": "Heizung (Modus Heizen)",
+            "en": "Heating (heat mode)"
+          },
+          "size": 4,
+          "newLine": true,
+          "hidden": "(!data.x_loaded) || ((data.d_f_mode !== 2 && !data.d_showAll) || (!data.x_hasHeat))"
+        },
+        "d_f_clima": {
+          "doNotSave": true,
+          "type": "checkbox",
+          "label": {
+            "de": "Heizung aktiv",
+            "en": "Heating enabled"
+          },
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4,
+          "hidden": "(!data.x_loaded) || ((data.d_f_mode !== 2 && !data.d_showAll) || (!data.x_hasHeat))",
+          "newLine": true,
+          "help": {
+            "de": "Schaltet den Heizungsausgang nach Wassertemperatur.",
+            "en": "Switches the heating output by water temperature."
+          }
+        },
+        "d_f_heatTemp": {
+          "doNotSave": true,
+          "type": "number",
+          "label": {
+            "de": "Solltemperatur",
+            "en": "Target temperature"
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "unit": "°C",
+          "min": 0,
+          "max": 99,
+          "step": 1,
+          "hidden": "(!data.x_loaded) || ((data.d_f_mode !== 2 && !data.d_showAll) || (!data.x_hasHeat) || (data.x_hasHeat === 2))",
+          "newLine": true
+        },
+        "d_f_heatMin": {
+          "doNotSave": true,
+          "type": "number",
+          "label": {
+            "de": "Mindesttemperatur",
+            "en": "Min temperature"
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "unit": "°C",
+          "min": 0,
+          "max": 50,
+          "step": 1,
+          "hidden": "(!data.x_loaded) || ((data.d_f_mode !== 2 && !data.d_showAll) || (data.x_hasHeat !== 2))",
+          "newLine": true
+        },
+        "d_f_heatTempHi": {
+          "doNotSave": true,
+          "type": "number",
+          "label": {
+            "de": "Höchsttemperatur",
+            "en": "Max temperature"
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "unit": "°C",
+          "min": 0,
+          "max": 50,
+          "step": 1,
+          "hidden": "(!data.x_loaded) || ((data.d_f_mode !== 2 && !data.d_showAll) || (data.x_hasHeat !== 2))"
+        },
+        "_hSmart": {
+          "type": "header",
+          "text": {
+            "de": "Smart",
+            "en": "Smart"
+          },
+          "size": 4,
+          "newLine": true,
+          "hidden": "(!data.x_loaded) || ((data.d_f_mode !== 3 && !data.d_showAll) || (!data.x_hasSmart))"
+        },
+        "d_f_smartMin": {
+          "doNotSave": true,
+          "type": "number",
+          "label": {
+            "de": "Mindesttemperatur",
+            "en": "Min temperature"
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "unit": "°C",
+          "min": 1,
+          "max": 50,
+          "step": 1,
+          "hidden": "(!data.x_loaded) || ((data.d_f_mode !== 3 && !data.d_showAll) || (!data.x_hasSmart))",
+          "newLine": true
+        },
+        "d_f_smartMax": {
+          "doNotSave": true,
+          "type": "number",
+          "label": {
+            "de": "Höchsttemperatur",
+            "en": "Max temperature"
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "unit": "°C",
+          "min": 1,
+          "max": 50,
+          "step": 1,
+          "hidden": "(!data.x_loaded) || ((data.d_f_mode !== 3 && !data.d_showAll) || (!data.x_hasSmart))"
+        },
+        "d_f_smartFreeze": {
+          "doNotSave": true,
+          "type": "checkbox",
+          "label": {
+            "de": "Frostschutz",
+            "en": "Freeze protection"
+          },
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4,
+          "hidden": "(!data.x_loaded) || ((data.d_f_mode !== 3 && !data.d_showAll) || (!data.x_hasSmart))",
+          "help": {
+            "de": "Pumpe läuft bei Frostgefahr.",
+            "en": "Pump runs when there is a risk of frost."
+          }
+        },
+        "_hIntel": {
+          "type": "header",
+          "text": {
+            "de": "Intel",
+            "en": "Intel"
+          },
+          "size": 4,
+          "newLine": true,
+          "hidden": "(!data.x_loaded) || (data.d_f_mode !== 4 && !data.d_showAll)"
+        },
+        "d_f_intelTemp": {
+          "doNotSave": true,
+          "type": "number",
+          "label": {
+            "de": "Temperatur",
+            "en": "Temperature"
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "unit": "°C",
+          "min": 1,
+          "max": 50,
+          "step": 1,
+          "hidden": "(!data.x_loaded) || (data.d_f_mode !== 4 && !data.d_showAll)",
+          "newLine": true
+        },
+        "d_f_intelHours": {
+          "doNotSave": true,
+          "type": "number",
+          "label": {
+            "de": "Filterstunden pro Tag",
+            "en": "Filter hours per day"
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "unit": "h",
+          "min": 2,
+          "max": 23,
+          "step": 1,
+          "hidden": "(!data.x_loaded) || (data.d_f_mode !== 4 && !data.d_showAll)"
+        },
+        "_send": {
+          "type": "sendTo",
+          "command": "applySettings",
+          "jsonData": "{\"poolId\":\"${data.poolId}\",\"section\":\"filtration\",\"values\":{\"d_f_mode\":\"${data.d_f_mode}\",\"d_f_status\":\"${data.d_f_status}\",\"d_f_speed\":\"${data.d_f_speed}\",\"d_f_i1from\":\"${data.d_f_i1from}\",\"d_f_i1to\":\"${data.d_f_i1to}\",\"d_f_i1speed\":\"${data.d_f_i1speed}\",\"d_f_i2from\":\"${data.d_f_i2from}\",\"d_f_i2to\":\"${data.d_f_i2to}\",\"d_f_i2speed\":\"${data.d_f_i2speed}\",\"d_f_i3from\":\"${data.d_f_i3from}\",\"d_f_i3to\":\"${data.d_f_i3to}\",\"d_f_i3speed\":\"${data.d_f_i3speed}\",\"d_f_clima\":\"${data.d_f_clima}\",\"d_f_heatTemp\":\"${data.d_f_heatTemp}\",\"d_f_heatMin\":\"${data.d_f_heatMin}\",\"d_f_heatTempHi\":\"${data.d_f_heatTempHi}\",\"d_f_smartFreeze\":\"${data.d_f_smartFreeze}\",\"d_f_smartMin\":\"${data.d_f_smartMin}\",\"d_f_smartMax\":\"${data.d_f_smartMax}\",\"d_f_intelTemp\":\"${data.d_f_intelTemp}\",\"d_f_intelHours\":\"${data.d_f_intelHours}\"}}",
+          "label": {
+            "de": "Pumpe & Heizung an Anlage senden",
+            "en": "Send pump & heating to pool"
+          },
+          "icon": "send",
+          "variant": "contained",
+          "useNative": true,
+          "showProcess": true,
+          "timeout": 30000,
+          "newLine": true,
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4,
+          "confirm": {
+            "text": {
+              "de": "Die geänderten Werte werden sofort an die Poolsteuerung gesendet. Nur Felder, die von der Anlage abweichen, werden übertragen.",
+              "en": "Changed values are sent to the pool controller immediately. Only fields that differ from the controller are transmitted."
+            },
+            "title": {
+              "de": "An Anlage senden?",
+              "en": "Send to pool?"
+            },
+            "ok": {
+              "de": "Senden",
+              "en": "Send"
+            },
+            "cancel": {
+              "de": "Abbrechen",
+              "en": "Cancel"
+            },
+            "type": "warning"
+          },
+          "hidden": "(!data.x_loaded)"
+        },
+        "_hint": {
+          "type": "staticText",
+          "text": {
+            "de": "„Speichern“ unten betrifft nur Adapter-Einstellungen. Werte der Anlage werden ausschließlich über „An Anlage senden“ übertragen.",
+            "en": "“Save” only stores adapter settings. Pool values are only transferred with “Send to pool”."
+          },
+          "newLine": true,
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12,
+          "style": {
+            "opacity": 0.75,
+            "fontSize": 13
+          },
+          "hidden": "(!data.x_loaded)"
+        },
+        "x_res_filtration": {
+          "type": "text",
+          "label": {
+            "de": "Letzte Übertragung",
+            "en": "Last transfer"
+          },
+          "readOnly": true,
+          "minRows": 2,
+          "maxRows": 8,
+          "doNotSave": true,
+          "noClearButton": true,
+          "newLine": true,
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 8,
+          "xl": 8,
+          "hidden": "!data.x_res_filtration"
+        }
+      }
+    },
+    "tabLight": {
+      "type": "panel",
+      "label": {
+        "de": "Licht",
+        "en": "Light"
+      },
+      "items": {
+        "_nl": {
+          "type": "infoBox",
+          "boxType": "info",
+          "closeable": false,
+          "title": {
+            "de": "Noch keine Daten von der Anlage",
+            "en": "No data from the pool yet"
+          },
+          "text": {
+            "de": "Öffne zuerst den Tab „Anlage“ und lade die Einstellungen. Die Instanz muss dafür laufen und mit deinem Vistapool-Konto verbunden sein.",
+            "en": "Open the “Pool” tab first and load the settings. The instance must be running and connected."
+          },
+          "hidden": "data.x_loaded",
+          "newLine": true,
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
+        },
+        "_autoload": {
+          "type": "sendTo",
+          "command": "loadSettings",
+          "jsonData": "{\"poolId\":\"${data.poolId}\"}",
+          "onLoaded": true,
+          "useNative": true,
+          "showProcess": true,
+          "timeout": 30000,
+          "label": {
+            "de": "Einstellungen von der Anlage laden",
+            "en": "Load settings from pool"
+          },
+          "icon": "refresh",
+          "variant": "outlined",
+          "newLine": true,
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4,
+          "hidden": "data.x_loaded || !_alive"
+        },
+        "d_l_mode": {
+          "doNotSave": true,
+          "type": "select",
+          "format": "radio",
+          "horizontal": true,
+          "label": {
+            "de": "Lichtmodus",
+            "en": "Light mode"
+          },
+          "options": [
+            {
+              "value": 0,
+              "label": {
+                "de": "Manuell",
+                "en": "Manual"
+              }
+            },
+            {
+              "value": 1,
+              "label": {
+                "de": "Auto (Zeitplan)",
+                "en": "Auto (schedule)"
+              }
+            }
+          ],
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12,
+          "newLine": true,
+          "hidden": "(!data.x_loaded)"
+        },
+        "d_l_status": {
+          "doNotSave": true,
+          "type": "checkbox",
+          "label": {
+            "de": "Licht an",
+            "en": "Light on"
+          },
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4,
+          "hidden": "(!data.x_loaded) || (data.d_l_mode !== 0)",
+          "newLine": true
+        },
+        "d_l_from": {
+          "doNotSave": true,
+          "type": "timePicker",
+          "label": {
+            "de": "Ein um",
+            "en": "On at"
+          },
+          "returnFormat": "HH:mm:ss",
+          "format": "HH:mm",
+          "views": [
+            "hours",
+            "minutes"
+          ],
+          "timeSteps": {
+            "hours": 1,
+            "minutes": 5
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || (data.d_l_mode !== 1)",
+          "newLine": true
+        },
+        "d_l_to": {
+          "doNotSave": true,
+          "type": "timePicker",
+          "label": {
+            "de": "Aus um",
+            "en": "Off at"
+          },
+          "returnFormat": "HH:mm:ss",
+          "format": "HH:mm",
+          "views": [
+            "hours",
+            "minutes"
+          ],
+          "timeSteps": {
+            "hours": 1,
+            "minutes": 5
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || (data.d_l_mode !== 1)"
+        },
+        "d_l_freq": {
+          "doNotSave": true,
+          "type": "select",
+          "label": {
+            "de": "Wiederholung",
+            "en": "Repeat"
+          },
+          "options": [
+            {
+              "value": 86400,
+              "label": {
+                "de": "täglich",
+                "en": "daily"
+              }
+            },
+            {
+              "value": 172800,
+              "label": {
+                "de": "alle 2 Tage",
+                "en": "every 2 days"
+              }
+            },
+            {
+              "value": 259200,
+              "label": {
+                "de": "alle 3 Tage",
+                "en": "every 3 days"
+              }
+            },
+            {
+              "value": 345600,
+              "label": {
+                "de": "alle 4 Tage",
+                "en": "every 4 days"
+              }
+            },
+            {
+              "value": 432000,
+              "label": {
+                "de": "alle 5 Tage",
+                "en": "every 5 days"
+              }
+            },
+            {
+              "value": 604800,
+              "label": {
+                "de": "wöchentlich",
+                "en": "weekly"
+              }
+            },
+            {
+              "value": 1209600,
+              "label": {
+                "de": "alle 2 Wochen",
+                "en": "every 2 weeks"
+              }
+            },
+            {
+              "value": 1814400,
+              "label": {
+                "de": "alle 3 Wochen",
+                "en": "every 3 weeks"
+              }
+            },
+            {
+              "value": 2419200,
+              "label": {
+                "de": "alle 4 Wochen",
+                "en": "every 4 weeks"
+              }
+            }
+          ],
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || (data.d_l_mode !== 1)"
+        },
+        "_send": {
+          "type": "sendTo",
+          "command": "applySettings",
+          "jsonData": "{\"poolId\":\"${data.poolId}\",\"section\":\"light\",\"values\":{\"d_l_mode\":\"${data.d_l_mode}\",\"d_l_status\":\"${data.d_l_status}\",\"d_l_from\":\"${data.d_l_from}\",\"d_l_to\":\"${data.d_l_to}\",\"d_l_freq\":\"${data.d_l_freq}\"}}",
+          "label": {
+            "de": "Licht an Anlage senden",
+            "en": "Send light to pool"
+          },
+          "icon": "send",
+          "variant": "contained",
+          "useNative": true,
+          "showProcess": true,
+          "timeout": 30000,
+          "newLine": true,
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4,
+          "confirm": {
+            "text": {
+              "de": "Die geänderten Werte werden sofort an die Poolsteuerung gesendet. Nur Felder, die von der Anlage abweichen, werden übertragen.",
+              "en": "Changed values are sent to the pool controller immediately. Only fields that differ from the controller are transmitted."
+            },
+            "title": {
+              "de": "An Anlage senden?",
+              "en": "Send to pool?"
+            },
+            "ok": {
+              "de": "Senden",
+              "en": "Send"
+            },
+            "cancel": {
+              "de": "Abbrechen",
+              "en": "Cancel"
+            },
+            "type": "warning"
+          },
+          "hidden": "(!data.x_loaded)"
+        },
+        "_hint": {
+          "type": "staticText",
+          "text": {
+            "de": "„Speichern“ unten betrifft nur Adapter-Einstellungen. Werte der Anlage werden ausschließlich über „An Anlage senden“ übertragen.",
+            "en": "“Save” only stores adapter settings. Pool values are only transferred with “Send to pool”."
+          },
+          "newLine": true,
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12,
+          "style": {
+            "opacity": 0.75,
+            "fontSize": 13
+          },
+          "hidden": "(!data.x_loaded)"
+        },
+        "x_res_light": {
+          "type": "text",
+          "label": {
+            "de": "Letzte Übertragung",
+            "en": "Last transfer"
+          },
+          "readOnly": true,
+          "minRows": 2,
+          "maxRows": 8,
+          "doNotSave": true,
+          "noClearButton": true,
+          "newLine": true,
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 8,
+          "xl": 8,
+          "hidden": "!data.x_res_light"
+        }
+      }
+    },
+    "tabRelays": {
+      "type": "panel",
+      "label": {
+        "de": "Relais",
+        "en": "Relays"
+      },
+      "items": {
+        "_nl": {
+          "type": "infoBox",
+          "boxType": "info",
+          "closeable": false,
+          "title": {
+            "de": "Noch keine Daten von der Anlage",
+            "en": "No data from the pool yet"
+          },
+          "text": {
+            "de": "Öffne zuerst den Tab „Anlage“ und lade die Einstellungen. Die Instanz muss dafür laufen und mit deinem Vistapool-Konto verbunden sein.",
+            "en": "Open the “Pool” tab first and load the settings. The instance must be running and connected."
+          },
+          "hidden": "data.x_loaded",
+          "newLine": true,
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
+        },
+        "_autoload": {
+          "type": "sendTo",
+          "command": "loadSettings",
+          "jsonData": "{\"poolId\":\"${data.poolId}\"}",
+          "onLoaded": true,
+          "useNative": true,
+          "showProcess": true,
+          "timeout": 30000,
+          "label": {
+            "de": "Einstellungen von der Anlage laden",
+            "en": "Load settings from pool"
+          },
+          "icon": "refresh",
+          "variant": "outlined",
+          "newLine": true,
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4,
+          "hidden": "data.x_loaded || !_alive"
+        },
+        "_intro": {
+          "type": "staticText",
+          "text": {
+            "de": "„Verwendung“ ist nur für ioBroker (Objektnamen) und wird mit „Speichern“ übernommen. Name und Modus liegen in der Steuerung und gehen mit „An Anlage senden“.",
+            "en": "“Usage” is ioBroker-only and is stored with “Save”. Name and mode live in the controller."
+          },
+          "newLine": true,
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12,
+          "style": {
+            "opacity": 0.75,
+            "fontSize": 13
+          },
+          "hidden": "(!data.x_loaded)"
+        },
+        "_h1": {
+          "type": "header",
+          "text": {
+            "de": "AUX 1",
+            "en": "AUX 1"
+          },
+          "size": 3,
+          "newLine": true,
+          "hidden": "(!data.x_loaded) || (data.x_relays < 1)"
+        },
+        "relayUse1": {
+          "type": "select",
+          "label": {
+            "de": "Verwendung (ioBroker)",
+            "en": "Usage (ioBroker)"
+          },
+          "options": [
+            {
+              "value": "",
+              "label": {
+                "de": "– nicht belegt / frei –",
+                "en": "– unused –"
+              }
+            },
+            {
+              "value": "heatpump",
+              "label": {
+                "de": "Wärmepumpe",
+                "en": "Heat pump"
+              }
+            },
+            {
+              "value": "light",
+              "label": {
+                "de": "Beleuchtung",
+                "en": "Lighting"
+              }
+            },
+            {
+              "value": "counterflow",
+              "label": {
+                "de": "Gegenstromanlage",
+                "en": "Counter-current"
+              }
+            },
+            {
+              "value": "feature",
+              "label": {
+                "de": "Wasserattraktion (Fontäne, Wasserfall)",
+                "en": "Water feature"
+              }
+            },
+            {
+              "value": "dosing",
+              "label": {
+                "de": "Dosierung",
+                "en": "Dosing"
+              }
+            },
+            {
+              "value": "cover",
+              "label": {
+                "de": "Abdeckung",
+                "en": "Cover"
+              }
+            },
+            {
+              "value": "other",
+              "label": {
+                "de": "Sonstiges",
+                "en": "Other"
+              }
+            }
+          ],
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "newLine": true,
+          "hidden": "(!data.x_loaded) || (data.x_relays < 1)"
+        },
+        "d_r1_name": {
+          "doNotSave": true,
+          "type": "text",
+          "label": {
+            "de": "Name in der Steuerung",
+            "en": "Name in controller"
+          },
+          "maxLength": 10,
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || (data.x_relays < 1)",
+          "help": {
+            "de": "max. 10 Zeichen",
+            "en": "max. 10 characters"
+          }
+        },
+        "d_r1_mode": {
+          "doNotSave": true,
+          "type": "select",
+          "format": "radio",
+          "horizontal": true,
+          "label": {
+            "de": "Modus",
+            "en": "Mode"
+          },
+          "options": [
+            {
+              "value": 0,
+              "label": {
+                "de": "Manuell",
+                "en": "Manual"
+              }
+            },
+            {
+              "value": 1,
+              "label": {
+                "de": "Auto (Zeitplan)",
+                "en": "Auto (schedule)"
+              }
+            },
+            {
+              "value": 2,
+              "label": {
+                "de": "Tempo (Laufzeit)",
+                "en": "Timer"
+              }
+            },
+            {
+              "value": 3,
+              "label": {
+                "de": "Gekoppelt (Signal)",
+                "en": "Linked"
+              }
+            },
+            {
+              "value": 4,
+              "label": {
+                "de": "Gekoppelt + Zeitplan",
+                "en": "Linked + schedule"
+              }
+            }
+          ],
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12,
+          "newLine": true,
+          "hidden": "(!data.x_loaded) || (data.x_relays < 1)"
+        },
+        "d_r1_onoff": {
+          "doNotSave": true,
+          "type": "checkbox",
+          "label": {
+            "de": "Relais an",
+            "en": "Relay on"
+          },
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 1) || (data.d_r1_mode !== 0))",
+          "newLine": true
+        },
+        "d_r1_from": {
+          "doNotSave": true,
+          "type": "timePicker",
+          "label": {
+            "de": "Fenster 1 von",
+            "en": "Window 1 from"
+          },
+          "returnFormat": "HH:mm:ss",
+          "format": "HH:mm",
+          "views": [
+            "hours",
+            "minutes"
+          ],
+          "timeSteps": {
+            "hours": 1,
+            "minutes": 5
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 1) || (![1,4].includes(data.d_r1_mode)))",
+          "newLine": true
+        },
+        "d_r1_to": {
+          "doNotSave": true,
+          "type": "timePicker",
+          "label": {
+            "de": "bis",
+            "en": "to"
+          },
+          "returnFormat": "HH:mm:ss",
+          "format": "HH:mm",
+          "views": [
+            "hours",
+            "minutes"
+          ],
+          "timeSteps": {
+            "hours": 1,
+            "minutes": 5
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 1) || (![1,4].includes(data.d_r1_mode)))"
+        },
+        "d_r1_freq": {
+          "doNotSave": true,
+          "type": "select",
+          "label": {
+            "de": "Wiederholung",
+            "en": "Repeat"
+          },
+          "options": [
+            {
+              "value": 86400,
+              "label": {
+                "de": "täglich",
+                "en": "daily"
+              }
+            },
+            {
+              "value": 172800,
+              "label": {
+                "de": "alle 2 Tage",
+                "en": "every 2 days"
+              }
+            },
+            {
+              "value": 259200,
+              "label": {
+                "de": "alle 3 Tage",
+                "en": "every 3 days"
+              }
+            },
+            {
+              "value": 345600,
+              "label": {
+                "de": "alle 4 Tage",
+                "en": "every 4 days"
+              }
+            },
+            {
+              "value": 432000,
+              "label": {
+                "de": "alle 5 Tage",
+                "en": "every 5 days"
+              }
+            },
+            {
+              "value": 604800,
+              "label": {
+                "de": "wöchentlich",
+                "en": "weekly"
+              }
+            },
+            {
+              "value": 1209600,
+              "label": {
+                "de": "alle 2 Wochen",
+                "en": "every 2 weeks"
+              }
+            },
+            {
+              "value": 1814400,
+              "label": {
+                "de": "alle 3 Wochen",
+                "en": "every 3 weeks"
+              }
+            },
+            {
+              "value": 2419200,
+              "label": {
+                "de": "alle 4 Wochen",
+                "en": "every 4 weeks"
+              }
+            }
+          ],
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 1) || (![1,4].includes(data.d_r1_mode)))"
+        },
+        "d_r1_from2": {
+          "doNotSave": true,
+          "type": "timePicker",
+          "label": {
+            "de": "Fenster 2 von",
+            "en": "Window 2 from"
+          },
+          "returnFormat": "HH:mm:ss",
+          "format": "HH:mm",
+          "views": [
+            "hours",
+            "minutes"
+          ],
+          "timeSteps": {
+            "hours": 1,
+            "minutes": 5
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 1) || (data.d_r1_mode !== 1))",
+          "newLine": true
+        },
+        "d_r1_to2": {
+          "doNotSave": true,
+          "type": "timePicker",
+          "label": {
+            "de": "bis",
+            "en": "to"
+          },
+          "returnFormat": "HH:mm:ss",
+          "format": "HH:mm",
+          "views": [
+            "hours",
+            "minutes"
+          ],
+          "timeSteps": {
+            "hours": 1,
+            "minutes": 5
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 1) || (data.d_r1_mode !== 1))"
+        },
+        "d_r1_freq2": {
+          "doNotSave": true,
+          "type": "select",
+          "label": {
+            "de": "Wiederholung",
+            "en": "Repeat"
+          },
+          "options": [
+            {
+              "value": 86400,
+              "label": {
+                "de": "täglich",
+                "en": "daily"
+              }
+            },
+            {
+              "value": 172800,
+              "label": {
+                "de": "alle 2 Tage",
+                "en": "every 2 days"
+              }
+            },
+            {
+              "value": 259200,
+              "label": {
+                "de": "alle 3 Tage",
+                "en": "every 3 days"
+              }
+            },
+            {
+              "value": 345600,
+              "label": {
+                "de": "alle 4 Tage",
+                "en": "every 4 days"
+              }
+            },
+            {
+              "value": 432000,
+              "label": {
+                "de": "alle 5 Tage",
+                "en": "every 5 days"
+              }
+            },
+            {
+              "value": 604800,
+              "label": {
+                "de": "wöchentlich",
+                "en": "weekly"
+              }
+            },
+            {
+              "value": 1209600,
+              "label": {
+                "de": "alle 2 Wochen",
+                "en": "every 2 weeks"
+              }
+            },
+            {
+              "value": 1814400,
+              "label": {
+                "de": "alle 3 Wochen",
+                "en": "every 3 weeks"
+              }
+            },
+            {
+              "value": 2419200,
+              "label": {
+                "de": "alle 4 Wochen",
+                "en": "every 4 weeks"
+              }
+            }
+          ],
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 1) || (data.d_r1_mode !== 1))"
+        },
+        "d_r1_tempo": {
+          "doNotSave": true,
+          "type": "number",
+          "label": {
+            "de": "Laufzeit",
+            "en": "Run time"
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "unit": "min",
+          "min": 0,
+          "max": 180,
+          "step": 1,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 1) || (data.d_r1_mode !== 2))",
+          "newLine": true
+        },
+        "d_r1_key": {
+          "doNotSave": true,
+          "type": "select",
+          "label": {
+            "de": "Auslöser (Taster)",
+            "en": "Trigger key"
+          },
+          "options": [
+            {
+              "value": 0,
+              "label": {
+                "de": "keiner",
+                "en": "none"
+              }
+            },
+            {
+              "value": 1,
+              "label": {
+                "de": "Taster (+)",
+                "en": "Key (+)"
+              }
+            },
+            {
+              "value": 2,
+              "label": {
+                "de": "Taster (−)",
+                "en": "Key (−)"
+              }
+            }
+          ],
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 1) || (data.d_r1_mode !== 2))"
+        },
+        "d_r1_signal": {
+          "doNotSave": true,
+          "type": "select",
+          "label": {
+            "de": "Gekoppelt an",
+            "en": "Linked to"
+          },
+          "options": [
+            {
+              "value": 0,
+              "label": {
+                "de": "Abdeckung",
+                "en": "Cover"
+              }
+            },
+            {
+              "value": 1,
+              "label": {
+                "de": "Durchfluss FL1",
+                "en": "Flow FL1"
+              }
+            },
+            {
+              "value": 2,
+              "label": {
+                "de": "Durchfluss FL2",
+                "en": "Flow FL2"
+              }
+            },
+            {
+              "value": 3,
+              "label": {
+                "de": "Slave",
+                "en": "Slave"
+              }
+            },
+            {
+              "value": 4,
+              "label": {
+                "de": "Tank 1",
+                "en": "Tank 1"
+              }
+            },
+            {
+              "value": 5,
+              "label": {
+                "de": "Tank 2",
+                "en": "Tank 2"
+              }
+            },
+            {
+              "value": 6,
+              "label": {
+                "de": "Stromschleife 1",
+                "en": "Current loop 1"
+              }
+            },
+            {
+              "value": 7,
+              "label": {
+                "de": "Stromschleife 2",
+                "en": "Current loop 2"
+              }
+            }
+          ],
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 1) || (![3,4].includes(data.d_r1_mode)))",
+          "newLine": true
+        },
+        "d_r1_delay": {
+          "doNotSave": true,
+          "type": "number",
+          "label": {
+            "de": "Verzögerung",
+            "en": "Delay"
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "unit": "s",
+          "min": 0,
+          "max": 30,
+          "step": 1,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 1) || (![3,4].includes(data.d_r1_mode)))"
+        },
+        "d_r1_polarity": {
+          "doNotSave": true,
+          "type": "select",
+          "label": {
+            "de": "Kontakt",
+            "en": "Contact"
+          },
+          "options": [
+            {
+              "value": 0,
+              "label": {
+                "de": "Öffner",
+                "en": "Normally open"
+              }
+            },
+            {
+              "value": 1,
+              "label": {
+                "de": "Schließer",
+                "en": "Normally closed"
+              }
+            }
+          ],
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 1) || (![3,4].includes(data.d_r1_mode)))"
+        },
+        "_send1": {
+          "type": "sendTo",
+          "command": "applySettings",
+          "jsonData": "{\"poolId\":\"${data.poolId}\",\"section\":\"relay1\",\"values\":{\"d_r1_name\":\"${data.d_r1_name}\",\"d_r1_mode\":\"${data.d_r1_mode}\",\"d_r1_onoff\":\"${data.d_r1_onoff}\",\"d_r1_from\":\"${data.d_r1_from}\",\"d_r1_to\":\"${data.d_r1_to}\",\"d_r1_freq\":\"${data.d_r1_freq}\",\"d_r1_from2\":\"${data.d_r1_from2}\",\"d_r1_to2\":\"${data.d_r1_to2}\",\"d_r1_freq2\":\"${data.d_r1_freq2}\",\"d_r1_tempo\":\"${data.d_r1_tempo}\",\"d_r1_key\":\"${data.d_r1_key}\",\"d_r1_signal\":\"${data.d_r1_signal}\",\"d_r1_delay\":\"${data.d_r1_delay}\",\"d_r1_polarity\":\"${data.d_r1_polarity}\"}}",
+          "label": {
+            "de": "AUX 1 an Anlage senden",
+            "en": "Send AUX 1 to pool"
+          },
+          "icon": "send",
+          "variant": "contained",
+          "useNative": true,
+          "showProcess": true,
+          "timeout": 30000,
+          "newLine": true,
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4,
+          "confirm": {
+            "text": {
+              "de": "Die geänderten Werte werden sofort an die Poolsteuerung gesendet. Nur Felder, die von der Anlage abweichen, werden übertragen.",
+              "en": "Changed values are sent to the pool controller immediately. Only fields that differ from the controller are transmitted."
+            },
+            "title": {
+              "de": "An Anlage senden?",
+              "en": "Send to pool?"
+            },
+            "ok": {
+              "de": "Senden",
+              "en": "Send"
+            },
+            "cancel": {
+              "de": "Abbrechen",
+              "en": "Cancel"
+            },
+            "type": "warning"
+          },
+          "hidden": "(!data.x_loaded) || (data.x_relays < 1)"
+        },
+        "x_res_relay1": {
+          "type": "text",
+          "label": {
+            "de": "Letzte Übertragung",
+            "en": "Last transfer"
+          },
+          "readOnly": true,
+          "minRows": 2,
+          "maxRows": 8,
+          "doNotSave": true,
+          "noClearButton": true,
+          "newLine": true,
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 8,
+          "xl": 8,
+          "hidden": "!data.x_res_relay1"
+        },
+        "_h2": {
+          "type": "header",
+          "text": {
+            "de": "AUX 2",
+            "en": "AUX 2"
+          },
+          "size": 3,
+          "newLine": true,
+          "hidden": "(!data.x_loaded) || (data.x_relays < 2)"
+        },
+        "relayUse2": {
+          "type": "select",
+          "label": {
+            "de": "Verwendung (ioBroker)",
+            "en": "Usage (ioBroker)"
+          },
+          "options": [
+            {
+              "value": "",
+              "label": {
+                "de": "– nicht belegt / frei –",
+                "en": "– unused –"
+              }
+            },
+            {
+              "value": "heatpump",
+              "label": {
+                "de": "Wärmepumpe",
+                "en": "Heat pump"
+              }
+            },
+            {
+              "value": "light",
+              "label": {
+                "de": "Beleuchtung",
+                "en": "Lighting"
+              }
+            },
+            {
+              "value": "counterflow",
+              "label": {
+                "de": "Gegenstromanlage",
+                "en": "Counter-current"
+              }
+            },
+            {
+              "value": "feature",
+              "label": {
+                "de": "Wasserattraktion (Fontäne, Wasserfall)",
+                "en": "Water feature"
+              }
+            },
+            {
+              "value": "dosing",
+              "label": {
+                "de": "Dosierung",
+                "en": "Dosing"
+              }
+            },
+            {
+              "value": "cover",
+              "label": {
+                "de": "Abdeckung",
+                "en": "Cover"
+              }
+            },
+            {
+              "value": "other",
+              "label": {
+                "de": "Sonstiges",
+                "en": "Other"
+              }
+            }
+          ],
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "newLine": true,
+          "hidden": "(!data.x_loaded) || (data.x_relays < 2)"
+        },
+        "d_r2_name": {
+          "doNotSave": true,
+          "type": "text",
+          "label": {
+            "de": "Name in der Steuerung",
+            "en": "Name in controller"
+          },
+          "maxLength": 10,
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || (data.x_relays < 2)",
+          "help": {
+            "de": "max. 10 Zeichen",
+            "en": "max. 10 characters"
+          }
+        },
+        "d_r2_mode": {
+          "doNotSave": true,
+          "type": "select",
+          "format": "radio",
+          "horizontal": true,
+          "label": {
+            "de": "Modus",
+            "en": "Mode"
+          },
+          "options": [
+            {
+              "value": 0,
+              "label": {
+                "de": "Manuell",
+                "en": "Manual"
+              }
+            },
+            {
+              "value": 1,
+              "label": {
+                "de": "Auto (Zeitplan)",
+                "en": "Auto (schedule)"
+              }
+            },
+            {
+              "value": 2,
+              "label": {
+                "de": "Tempo (Laufzeit)",
+                "en": "Timer"
+              }
+            },
+            {
+              "value": 3,
+              "label": {
+                "de": "Gekoppelt (Signal)",
+                "en": "Linked"
+              }
+            },
+            {
+              "value": 4,
+              "label": {
+                "de": "Gekoppelt + Zeitplan",
+                "en": "Linked + schedule"
+              }
+            }
+          ],
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12,
+          "newLine": true,
+          "hidden": "(!data.x_loaded) || (data.x_relays < 2)"
+        },
+        "d_r2_onoff": {
+          "doNotSave": true,
+          "type": "checkbox",
+          "label": {
+            "de": "Relais an",
+            "en": "Relay on"
+          },
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 2) || (data.d_r2_mode !== 0))",
+          "newLine": true
+        },
+        "d_r2_from": {
+          "doNotSave": true,
+          "type": "timePicker",
+          "label": {
+            "de": "Fenster 1 von",
+            "en": "Window 1 from"
+          },
+          "returnFormat": "HH:mm:ss",
+          "format": "HH:mm",
+          "views": [
+            "hours",
+            "minutes"
+          ],
+          "timeSteps": {
+            "hours": 1,
+            "minutes": 5
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 2) || (![1,4].includes(data.d_r2_mode)))",
+          "newLine": true
+        },
+        "d_r2_to": {
+          "doNotSave": true,
+          "type": "timePicker",
+          "label": {
+            "de": "bis",
+            "en": "to"
+          },
+          "returnFormat": "HH:mm:ss",
+          "format": "HH:mm",
+          "views": [
+            "hours",
+            "minutes"
+          ],
+          "timeSteps": {
+            "hours": 1,
+            "minutes": 5
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 2) || (![1,4].includes(data.d_r2_mode)))"
+        },
+        "d_r2_freq": {
+          "doNotSave": true,
+          "type": "select",
+          "label": {
+            "de": "Wiederholung",
+            "en": "Repeat"
+          },
+          "options": [
+            {
+              "value": 86400,
+              "label": {
+                "de": "täglich",
+                "en": "daily"
+              }
+            },
+            {
+              "value": 172800,
+              "label": {
+                "de": "alle 2 Tage",
+                "en": "every 2 days"
+              }
+            },
+            {
+              "value": 259200,
+              "label": {
+                "de": "alle 3 Tage",
+                "en": "every 3 days"
+              }
+            },
+            {
+              "value": 345600,
+              "label": {
+                "de": "alle 4 Tage",
+                "en": "every 4 days"
+              }
+            },
+            {
+              "value": 432000,
+              "label": {
+                "de": "alle 5 Tage",
+                "en": "every 5 days"
+              }
+            },
+            {
+              "value": 604800,
+              "label": {
+                "de": "wöchentlich",
+                "en": "weekly"
+              }
+            },
+            {
+              "value": 1209600,
+              "label": {
+                "de": "alle 2 Wochen",
+                "en": "every 2 weeks"
+              }
+            },
+            {
+              "value": 1814400,
+              "label": {
+                "de": "alle 3 Wochen",
+                "en": "every 3 weeks"
+              }
+            },
+            {
+              "value": 2419200,
+              "label": {
+                "de": "alle 4 Wochen",
+                "en": "every 4 weeks"
+              }
+            }
+          ],
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 2) || (![1,4].includes(data.d_r2_mode)))"
+        },
+        "d_r2_from2": {
+          "doNotSave": true,
+          "type": "timePicker",
+          "label": {
+            "de": "Fenster 2 von",
+            "en": "Window 2 from"
+          },
+          "returnFormat": "HH:mm:ss",
+          "format": "HH:mm",
+          "views": [
+            "hours",
+            "minutes"
+          ],
+          "timeSteps": {
+            "hours": 1,
+            "minutes": 5
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 2) || (data.d_r2_mode !== 1))",
+          "newLine": true
+        },
+        "d_r2_to2": {
+          "doNotSave": true,
+          "type": "timePicker",
+          "label": {
+            "de": "bis",
+            "en": "to"
+          },
+          "returnFormat": "HH:mm:ss",
+          "format": "HH:mm",
+          "views": [
+            "hours",
+            "minutes"
+          ],
+          "timeSteps": {
+            "hours": 1,
+            "minutes": 5
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 2) || (data.d_r2_mode !== 1))"
+        },
+        "d_r2_freq2": {
+          "doNotSave": true,
+          "type": "select",
+          "label": {
+            "de": "Wiederholung",
+            "en": "Repeat"
+          },
+          "options": [
+            {
+              "value": 86400,
+              "label": {
+                "de": "täglich",
+                "en": "daily"
+              }
+            },
+            {
+              "value": 172800,
+              "label": {
+                "de": "alle 2 Tage",
+                "en": "every 2 days"
+              }
+            },
+            {
+              "value": 259200,
+              "label": {
+                "de": "alle 3 Tage",
+                "en": "every 3 days"
+              }
+            },
+            {
+              "value": 345600,
+              "label": {
+                "de": "alle 4 Tage",
+                "en": "every 4 days"
+              }
+            },
+            {
+              "value": 432000,
+              "label": {
+                "de": "alle 5 Tage",
+                "en": "every 5 days"
+              }
+            },
+            {
+              "value": 604800,
+              "label": {
+                "de": "wöchentlich",
+                "en": "weekly"
+              }
+            },
+            {
+              "value": 1209600,
+              "label": {
+                "de": "alle 2 Wochen",
+                "en": "every 2 weeks"
+              }
+            },
+            {
+              "value": 1814400,
+              "label": {
+                "de": "alle 3 Wochen",
+                "en": "every 3 weeks"
+              }
+            },
+            {
+              "value": 2419200,
+              "label": {
+                "de": "alle 4 Wochen",
+                "en": "every 4 weeks"
+              }
+            }
+          ],
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 2) || (data.d_r2_mode !== 1))"
+        },
+        "d_r2_tempo": {
+          "doNotSave": true,
+          "type": "number",
+          "label": {
+            "de": "Laufzeit",
+            "en": "Run time"
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "unit": "min",
+          "min": 0,
+          "max": 180,
+          "step": 1,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 2) || (data.d_r2_mode !== 2))",
+          "newLine": true
+        },
+        "d_r2_key": {
+          "doNotSave": true,
+          "type": "select",
+          "label": {
+            "de": "Auslöser (Taster)",
+            "en": "Trigger key"
+          },
+          "options": [
+            {
+              "value": 0,
+              "label": {
+                "de": "keiner",
+                "en": "none"
+              }
+            },
+            {
+              "value": 1,
+              "label": {
+                "de": "Taster (+)",
+                "en": "Key (+)"
+              }
+            },
+            {
+              "value": 2,
+              "label": {
+                "de": "Taster (−)",
+                "en": "Key (−)"
+              }
+            }
+          ],
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 2) || (data.d_r2_mode !== 2))"
+        },
+        "d_r2_signal": {
+          "doNotSave": true,
+          "type": "select",
+          "label": {
+            "de": "Gekoppelt an",
+            "en": "Linked to"
+          },
+          "options": [
+            {
+              "value": 0,
+              "label": {
+                "de": "Abdeckung",
+                "en": "Cover"
+              }
+            },
+            {
+              "value": 1,
+              "label": {
+                "de": "Durchfluss FL1",
+                "en": "Flow FL1"
+              }
+            },
+            {
+              "value": 2,
+              "label": {
+                "de": "Durchfluss FL2",
+                "en": "Flow FL2"
+              }
+            },
+            {
+              "value": 3,
+              "label": {
+                "de": "Slave",
+                "en": "Slave"
+              }
+            },
+            {
+              "value": 4,
+              "label": {
+                "de": "Tank 1",
+                "en": "Tank 1"
+              }
+            },
+            {
+              "value": 5,
+              "label": {
+                "de": "Tank 2",
+                "en": "Tank 2"
+              }
+            },
+            {
+              "value": 6,
+              "label": {
+                "de": "Stromschleife 1",
+                "en": "Current loop 1"
+              }
+            },
+            {
+              "value": 7,
+              "label": {
+                "de": "Stromschleife 2",
+                "en": "Current loop 2"
+              }
+            }
+          ],
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 2) || (![3,4].includes(data.d_r2_mode)))",
+          "newLine": true
+        },
+        "d_r2_delay": {
+          "doNotSave": true,
+          "type": "number",
+          "label": {
+            "de": "Verzögerung",
+            "en": "Delay"
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "unit": "s",
+          "min": 0,
+          "max": 30,
+          "step": 1,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 2) || (![3,4].includes(data.d_r2_mode)))"
+        },
+        "d_r2_polarity": {
+          "doNotSave": true,
+          "type": "select",
+          "label": {
+            "de": "Kontakt",
+            "en": "Contact"
+          },
+          "options": [
+            {
+              "value": 0,
+              "label": {
+                "de": "Öffner",
+                "en": "Normally open"
+              }
+            },
+            {
+              "value": 1,
+              "label": {
+                "de": "Schließer",
+                "en": "Normally closed"
+              }
+            }
+          ],
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 2) || (![3,4].includes(data.d_r2_mode)))"
+        },
+        "_send2": {
+          "type": "sendTo",
+          "command": "applySettings",
+          "jsonData": "{\"poolId\":\"${data.poolId}\",\"section\":\"relay2\",\"values\":{\"d_r2_name\":\"${data.d_r2_name}\",\"d_r2_mode\":\"${data.d_r2_mode}\",\"d_r2_onoff\":\"${data.d_r2_onoff}\",\"d_r2_from\":\"${data.d_r2_from}\",\"d_r2_to\":\"${data.d_r2_to}\",\"d_r2_freq\":\"${data.d_r2_freq}\",\"d_r2_from2\":\"${data.d_r2_from2}\",\"d_r2_to2\":\"${data.d_r2_to2}\",\"d_r2_freq2\":\"${data.d_r2_freq2}\",\"d_r2_tempo\":\"${data.d_r2_tempo}\",\"d_r2_key\":\"${data.d_r2_key}\",\"d_r2_signal\":\"${data.d_r2_signal}\",\"d_r2_delay\":\"${data.d_r2_delay}\",\"d_r2_polarity\":\"${data.d_r2_polarity}\"}}",
+          "label": {
+            "de": "AUX 2 an Anlage senden",
+            "en": "Send AUX 2 to pool"
+          },
+          "icon": "send",
+          "variant": "contained",
+          "useNative": true,
+          "showProcess": true,
+          "timeout": 30000,
+          "newLine": true,
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4,
+          "confirm": {
+            "text": {
+              "de": "Die geänderten Werte werden sofort an die Poolsteuerung gesendet. Nur Felder, die von der Anlage abweichen, werden übertragen.",
+              "en": "Changed values are sent to the pool controller immediately. Only fields that differ from the controller are transmitted."
+            },
+            "title": {
+              "de": "An Anlage senden?",
+              "en": "Send to pool?"
+            },
+            "ok": {
+              "de": "Senden",
+              "en": "Send"
+            },
+            "cancel": {
+              "de": "Abbrechen",
+              "en": "Cancel"
+            },
+            "type": "warning"
+          },
+          "hidden": "(!data.x_loaded) || (data.x_relays < 2)"
+        },
+        "x_res_relay2": {
+          "type": "text",
+          "label": {
+            "de": "Letzte Übertragung",
+            "en": "Last transfer"
+          },
+          "readOnly": true,
+          "minRows": 2,
+          "maxRows": 8,
+          "doNotSave": true,
+          "noClearButton": true,
+          "newLine": true,
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 8,
+          "xl": 8,
+          "hidden": "!data.x_res_relay2"
+        },
+        "_h3": {
+          "type": "header",
+          "text": {
+            "de": "AUX 3",
+            "en": "AUX 3"
+          },
+          "size": 3,
+          "newLine": true,
+          "hidden": "(!data.x_loaded) || (data.x_relays < 3)"
+        },
+        "relayUse3": {
+          "type": "select",
+          "label": {
+            "de": "Verwendung (ioBroker)",
+            "en": "Usage (ioBroker)"
+          },
+          "options": [
+            {
+              "value": "",
+              "label": {
+                "de": "– nicht belegt / frei –",
+                "en": "– unused –"
+              }
+            },
+            {
+              "value": "heatpump",
+              "label": {
+                "de": "Wärmepumpe",
+                "en": "Heat pump"
+              }
+            },
+            {
+              "value": "light",
+              "label": {
+                "de": "Beleuchtung",
+                "en": "Lighting"
+              }
+            },
+            {
+              "value": "counterflow",
+              "label": {
+                "de": "Gegenstromanlage",
+                "en": "Counter-current"
+              }
+            },
+            {
+              "value": "feature",
+              "label": {
+                "de": "Wasserattraktion (Fontäne, Wasserfall)",
+                "en": "Water feature"
+              }
+            },
+            {
+              "value": "dosing",
+              "label": {
+                "de": "Dosierung",
+                "en": "Dosing"
+              }
+            },
+            {
+              "value": "cover",
+              "label": {
+                "de": "Abdeckung",
+                "en": "Cover"
+              }
+            },
+            {
+              "value": "other",
+              "label": {
+                "de": "Sonstiges",
+                "en": "Other"
+              }
+            }
+          ],
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "newLine": true,
+          "hidden": "(!data.x_loaded) || (data.x_relays < 3)"
+        },
+        "d_r3_name": {
+          "doNotSave": true,
+          "type": "text",
+          "label": {
+            "de": "Name in der Steuerung",
+            "en": "Name in controller"
+          },
+          "maxLength": 10,
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || (data.x_relays < 3)",
+          "help": {
+            "de": "max. 10 Zeichen",
+            "en": "max. 10 characters"
+          }
+        },
+        "d_r3_mode": {
+          "doNotSave": true,
+          "type": "select",
+          "format": "radio",
+          "horizontal": true,
+          "label": {
+            "de": "Modus",
+            "en": "Mode"
+          },
+          "options": [
+            {
+              "value": 0,
+              "label": {
+                "de": "Manuell",
+                "en": "Manual"
+              }
+            },
+            {
+              "value": 1,
+              "label": {
+                "de": "Auto (Zeitplan)",
+                "en": "Auto (schedule)"
+              }
+            },
+            {
+              "value": 2,
+              "label": {
+                "de": "Tempo (Laufzeit)",
+                "en": "Timer"
+              }
+            },
+            {
+              "value": 3,
+              "label": {
+                "de": "Gekoppelt (Signal)",
+                "en": "Linked"
+              }
+            },
+            {
+              "value": 4,
+              "label": {
+                "de": "Gekoppelt + Zeitplan",
+                "en": "Linked + schedule"
+              }
+            }
+          ],
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12,
+          "newLine": true,
+          "hidden": "(!data.x_loaded) || (data.x_relays < 3)"
+        },
+        "d_r3_onoff": {
+          "doNotSave": true,
+          "type": "checkbox",
+          "label": {
+            "de": "Relais an",
+            "en": "Relay on"
+          },
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 3) || (data.d_r3_mode !== 0))",
+          "newLine": true
+        },
+        "d_r3_from": {
+          "doNotSave": true,
+          "type": "timePicker",
+          "label": {
+            "de": "Fenster 1 von",
+            "en": "Window 1 from"
+          },
+          "returnFormat": "HH:mm:ss",
+          "format": "HH:mm",
+          "views": [
+            "hours",
+            "minutes"
+          ],
+          "timeSteps": {
+            "hours": 1,
+            "minutes": 5
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 3) || (![1,4].includes(data.d_r3_mode)))",
+          "newLine": true
+        },
+        "d_r3_to": {
+          "doNotSave": true,
+          "type": "timePicker",
+          "label": {
+            "de": "bis",
+            "en": "to"
+          },
+          "returnFormat": "HH:mm:ss",
+          "format": "HH:mm",
+          "views": [
+            "hours",
+            "minutes"
+          ],
+          "timeSteps": {
+            "hours": 1,
+            "minutes": 5
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 3) || (![1,4].includes(data.d_r3_mode)))"
+        },
+        "d_r3_freq": {
+          "doNotSave": true,
+          "type": "select",
+          "label": {
+            "de": "Wiederholung",
+            "en": "Repeat"
+          },
+          "options": [
+            {
+              "value": 86400,
+              "label": {
+                "de": "täglich",
+                "en": "daily"
+              }
+            },
+            {
+              "value": 172800,
+              "label": {
+                "de": "alle 2 Tage",
+                "en": "every 2 days"
+              }
+            },
+            {
+              "value": 259200,
+              "label": {
+                "de": "alle 3 Tage",
+                "en": "every 3 days"
+              }
+            },
+            {
+              "value": 345600,
+              "label": {
+                "de": "alle 4 Tage",
+                "en": "every 4 days"
+              }
+            },
+            {
+              "value": 432000,
+              "label": {
+                "de": "alle 5 Tage",
+                "en": "every 5 days"
+              }
+            },
+            {
+              "value": 604800,
+              "label": {
+                "de": "wöchentlich",
+                "en": "weekly"
+              }
+            },
+            {
+              "value": 1209600,
+              "label": {
+                "de": "alle 2 Wochen",
+                "en": "every 2 weeks"
+              }
+            },
+            {
+              "value": 1814400,
+              "label": {
+                "de": "alle 3 Wochen",
+                "en": "every 3 weeks"
+              }
+            },
+            {
+              "value": 2419200,
+              "label": {
+                "de": "alle 4 Wochen",
+                "en": "every 4 weeks"
+              }
+            }
+          ],
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 3) || (![1,4].includes(data.d_r3_mode)))"
+        },
+        "d_r3_from2": {
+          "doNotSave": true,
+          "type": "timePicker",
+          "label": {
+            "de": "Fenster 2 von",
+            "en": "Window 2 from"
+          },
+          "returnFormat": "HH:mm:ss",
+          "format": "HH:mm",
+          "views": [
+            "hours",
+            "minutes"
+          ],
+          "timeSteps": {
+            "hours": 1,
+            "minutes": 5
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 3) || (data.d_r3_mode !== 1))",
+          "newLine": true
+        },
+        "d_r3_to2": {
+          "doNotSave": true,
+          "type": "timePicker",
+          "label": {
+            "de": "bis",
+            "en": "to"
+          },
+          "returnFormat": "HH:mm:ss",
+          "format": "HH:mm",
+          "views": [
+            "hours",
+            "minutes"
+          ],
+          "timeSteps": {
+            "hours": 1,
+            "minutes": 5
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 3) || (data.d_r3_mode !== 1))"
+        },
+        "d_r3_freq2": {
+          "doNotSave": true,
+          "type": "select",
+          "label": {
+            "de": "Wiederholung",
+            "en": "Repeat"
+          },
+          "options": [
+            {
+              "value": 86400,
+              "label": {
+                "de": "täglich",
+                "en": "daily"
+              }
+            },
+            {
+              "value": 172800,
+              "label": {
+                "de": "alle 2 Tage",
+                "en": "every 2 days"
+              }
+            },
+            {
+              "value": 259200,
+              "label": {
+                "de": "alle 3 Tage",
+                "en": "every 3 days"
+              }
+            },
+            {
+              "value": 345600,
+              "label": {
+                "de": "alle 4 Tage",
+                "en": "every 4 days"
+              }
+            },
+            {
+              "value": 432000,
+              "label": {
+                "de": "alle 5 Tage",
+                "en": "every 5 days"
+              }
+            },
+            {
+              "value": 604800,
+              "label": {
+                "de": "wöchentlich",
+                "en": "weekly"
+              }
+            },
+            {
+              "value": 1209600,
+              "label": {
+                "de": "alle 2 Wochen",
+                "en": "every 2 weeks"
+              }
+            },
+            {
+              "value": 1814400,
+              "label": {
+                "de": "alle 3 Wochen",
+                "en": "every 3 weeks"
+              }
+            },
+            {
+              "value": 2419200,
+              "label": {
+                "de": "alle 4 Wochen",
+                "en": "every 4 weeks"
+              }
+            }
+          ],
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 3) || (data.d_r3_mode !== 1))"
+        },
+        "d_r3_tempo": {
+          "doNotSave": true,
+          "type": "number",
+          "label": {
+            "de": "Laufzeit",
+            "en": "Run time"
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "unit": "min",
+          "min": 0,
+          "max": 180,
+          "step": 1,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 3) || (data.d_r3_mode !== 2))",
+          "newLine": true
+        },
+        "d_r3_key": {
+          "doNotSave": true,
+          "type": "select",
+          "label": {
+            "de": "Auslöser (Taster)",
+            "en": "Trigger key"
+          },
+          "options": [
+            {
+              "value": 0,
+              "label": {
+                "de": "keiner",
+                "en": "none"
+              }
+            },
+            {
+              "value": 1,
+              "label": {
+                "de": "Taster (+)",
+                "en": "Key (+)"
+              }
+            },
+            {
+              "value": 2,
+              "label": {
+                "de": "Taster (−)",
+                "en": "Key (−)"
+              }
+            }
+          ],
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 3) || (data.d_r3_mode !== 2))"
+        },
+        "d_r3_signal": {
+          "doNotSave": true,
+          "type": "select",
+          "label": {
+            "de": "Gekoppelt an",
+            "en": "Linked to"
+          },
+          "options": [
+            {
+              "value": 0,
+              "label": {
+                "de": "Abdeckung",
+                "en": "Cover"
+              }
+            },
+            {
+              "value": 1,
+              "label": {
+                "de": "Durchfluss FL1",
+                "en": "Flow FL1"
+              }
+            },
+            {
+              "value": 2,
+              "label": {
+                "de": "Durchfluss FL2",
+                "en": "Flow FL2"
+              }
+            },
+            {
+              "value": 3,
+              "label": {
+                "de": "Slave",
+                "en": "Slave"
+              }
+            },
+            {
+              "value": 4,
+              "label": {
+                "de": "Tank 1",
+                "en": "Tank 1"
+              }
+            },
+            {
+              "value": 5,
+              "label": {
+                "de": "Tank 2",
+                "en": "Tank 2"
+              }
+            },
+            {
+              "value": 6,
+              "label": {
+                "de": "Stromschleife 1",
+                "en": "Current loop 1"
+              }
+            },
+            {
+              "value": 7,
+              "label": {
+                "de": "Stromschleife 2",
+                "en": "Current loop 2"
+              }
+            }
+          ],
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 3) || (![3,4].includes(data.d_r3_mode)))",
+          "newLine": true
+        },
+        "d_r3_delay": {
+          "doNotSave": true,
+          "type": "number",
+          "label": {
+            "de": "Verzögerung",
+            "en": "Delay"
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "unit": "s",
+          "min": 0,
+          "max": 30,
+          "step": 1,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 3) || (![3,4].includes(data.d_r3_mode)))"
+        },
+        "d_r3_polarity": {
+          "doNotSave": true,
+          "type": "select",
+          "label": {
+            "de": "Kontakt",
+            "en": "Contact"
+          },
+          "options": [
+            {
+              "value": 0,
+              "label": {
+                "de": "Öffner",
+                "en": "Normally open"
+              }
+            },
+            {
+              "value": 1,
+              "label": {
+                "de": "Schließer",
+                "en": "Normally closed"
+              }
+            }
+          ],
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 3) || (![3,4].includes(data.d_r3_mode)))"
+        },
+        "_send3": {
+          "type": "sendTo",
+          "command": "applySettings",
+          "jsonData": "{\"poolId\":\"${data.poolId}\",\"section\":\"relay3\",\"values\":{\"d_r3_name\":\"${data.d_r3_name}\",\"d_r3_mode\":\"${data.d_r3_mode}\",\"d_r3_onoff\":\"${data.d_r3_onoff}\",\"d_r3_from\":\"${data.d_r3_from}\",\"d_r3_to\":\"${data.d_r3_to}\",\"d_r3_freq\":\"${data.d_r3_freq}\",\"d_r3_from2\":\"${data.d_r3_from2}\",\"d_r3_to2\":\"${data.d_r3_to2}\",\"d_r3_freq2\":\"${data.d_r3_freq2}\",\"d_r3_tempo\":\"${data.d_r3_tempo}\",\"d_r3_key\":\"${data.d_r3_key}\",\"d_r3_signal\":\"${data.d_r3_signal}\",\"d_r3_delay\":\"${data.d_r3_delay}\",\"d_r3_polarity\":\"${data.d_r3_polarity}\"}}",
+          "label": {
+            "de": "AUX 3 an Anlage senden",
+            "en": "Send AUX 3 to pool"
+          },
+          "icon": "send",
+          "variant": "contained",
+          "useNative": true,
+          "showProcess": true,
+          "timeout": 30000,
+          "newLine": true,
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4,
+          "confirm": {
+            "text": {
+              "de": "Die geänderten Werte werden sofort an die Poolsteuerung gesendet. Nur Felder, die von der Anlage abweichen, werden übertragen.",
+              "en": "Changed values are sent to the pool controller immediately. Only fields that differ from the controller are transmitted."
+            },
+            "title": {
+              "de": "An Anlage senden?",
+              "en": "Send to pool?"
+            },
+            "ok": {
+              "de": "Senden",
+              "en": "Send"
+            },
+            "cancel": {
+              "de": "Abbrechen",
+              "en": "Cancel"
+            },
+            "type": "warning"
+          },
+          "hidden": "(!data.x_loaded) || (data.x_relays < 3)"
+        },
+        "x_res_relay3": {
+          "type": "text",
+          "label": {
+            "de": "Letzte Übertragung",
+            "en": "Last transfer"
+          },
+          "readOnly": true,
+          "minRows": 2,
+          "maxRows": 8,
+          "doNotSave": true,
+          "noClearButton": true,
+          "newLine": true,
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 8,
+          "xl": 8,
+          "hidden": "!data.x_res_relay3"
+        },
+        "_h4": {
+          "type": "header",
+          "text": {
+            "de": "AUX 4",
+            "en": "AUX 4"
+          },
+          "size": 3,
+          "newLine": true,
+          "hidden": "(!data.x_loaded) || (data.x_relays < 4)"
+        },
+        "relayUse4": {
+          "type": "select",
+          "label": {
+            "de": "Verwendung (ioBroker)",
+            "en": "Usage (ioBroker)"
+          },
+          "options": [
+            {
+              "value": "",
+              "label": {
+                "de": "– nicht belegt / frei –",
+                "en": "– unused –"
+              }
+            },
+            {
+              "value": "heatpump",
+              "label": {
+                "de": "Wärmepumpe",
+                "en": "Heat pump"
+              }
+            },
+            {
+              "value": "light",
+              "label": {
+                "de": "Beleuchtung",
+                "en": "Lighting"
+              }
+            },
+            {
+              "value": "counterflow",
+              "label": {
+                "de": "Gegenstromanlage",
+                "en": "Counter-current"
+              }
+            },
+            {
+              "value": "feature",
+              "label": {
+                "de": "Wasserattraktion (Fontäne, Wasserfall)",
+                "en": "Water feature"
+              }
+            },
+            {
+              "value": "dosing",
+              "label": {
+                "de": "Dosierung",
+                "en": "Dosing"
+              }
+            },
+            {
+              "value": "cover",
+              "label": {
+                "de": "Abdeckung",
+                "en": "Cover"
+              }
+            },
+            {
+              "value": "other",
+              "label": {
+                "de": "Sonstiges",
+                "en": "Other"
+              }
+            }
+          ],
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "newLine": true,
+          "hidden": "(!data.x_loaded) || (data.x_relays < 4)"
+        },
+        "d_r4_name": {
+          "doNotSave": true,
+          "type": "text",
+          "label": {
+            "de": "Name in der Steuerung",
+            "en": "Name in controller"
+          },
+          "maxLength": 10,
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || (data.x_relays < 4)",
+          "help": {
+            "de": "max. 10 Zeichen",
+            "en": "max. 10 characters"
+          }
+        },
+        "d_r4_mode": {
+          "doNotSave": true,
+          "type": "select",
+          "format": "radio",
+          "horizontal": true,
+          "label": {
+            "de": "Modus",
+            "en": "Mode"
+          },
+          "options": [
+            {
+              "value": 0,
+              "label": {
+                "de": "Manuell",
+                "en": "Manual"
+              }
+            },
+            {
+              "value": 1,
+              "label": {
+                "de": "Auto (Zeitplan)",
+                "en": "Auto (schedule)"
+              }
+            },
+            {
+              "value": 2,
+              "label": {
+                "de": "Tempo (Laufzeit)",
+                "en": "Timer"
+              }
+            },
+            {
+              "value": 3,
+              "label": {
+                "de": "Gekoppelt (Signal)",
+                "en": "Linked"
+              }
+            },
+            {
+              "value": 4,
+              "label": {
+                "de": "Gekoppelt + Zeitplan",
+                "en": "Linked + schedule"
+              }
+            }
+          ],
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12,
+          "newLine": true,
+          "hidden": "(!data.x_loaded) || (data.x_relays < 4)"
+        },
+        "d_r4_onoff": {
+          "doNotSave": true,
+          "type": "checkbox",
+          "label": {
+            "de": "Relais an",
+            "en": "Relay on"
+          },
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 4) || (data.d_r4_mode !== 0))",
+          "newLine": true
+        },
+        "d_r4_from": {
+          "doNotSave": true,
+          "type": "timePicker",
+          "label": {
+            "de": "Fenster 1 von",
+            "en": "Window 1 from"
+          },
+          "returnFormat": "HH:mm:ss",
+          "format": "HH:mm",
+          "views": [
+            "hours",
+            "minutes"
+          ],
+          "timeSteps": {
+            "hours": 1,
+            "minutes": 5
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 4) || (![1,4].includes(data.d_r4_mode)))",
+          "newLine": true
+        },
+        "d_r4_to": {
+          "doNotSave": true,
+          "type": "timePicker",
+          "label": {
+            "de": "bis",
+            "en": "to"
+          },
+          "returnFormat": "HH:mm:ss",
+          "format": "HH:mm",
+          "views": [
+            "hours",
+            "minutes"
+          ],
+          "timeSteps": {
+            "hours": 1,
+            "minutes": 5
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 4) || (![1,4].includes(data.d_r4_mode)))"
+        },
+        "d_r4_freq": {
+          "doNotSave": true,
+          "type": "select",
+          "label": {
+            "de": "Wiederholung",
+            "en": "Repeat"
+          },
+          "options": [
+            {
+              "value": 86400,
+              "label": {
+                "de": "täglich",
+                "en": "daily"
+              }
+            },
+            {
+              "value": 172800,
+              "label": {
+                "de": "alle 2 Tage",
+                "en": "every 2 days"
+              }
+            },
+            {
+              "value": 259200,
+              "label": {
+                "de": "alle 3 Tage",
+                "en": "every 3 days"
+              }
+            },
+            {
+              "value": 345600,
+              "label": {
+                "de": "alle 4 Tage",
+                "en": "every 4 days"
+              }
+            },
+            {
+              "value": 432000,
+              "label": {
+                "de": "alle 5 Tage",
+                "en": "every 5 days"
+              }
+            },
+            {
+              "value": 604800,
+              "label": {
+                "de": "wöchentlich",
+                "en": "weekly"
+              }
+            },
+            {
+              "value": 1209600,
+              "label": {
+                "de": "alle 2 Wochen",
+                "en": "every 2 weeks"
+              }
+            },
+            {
+              "value": 1814400,
+              "label": {
+                "de": "alle 3 Wochen",
+                "en": "every 3 weeks"
+              }
+            },
+            {
+              "value": 2419200,
+              "label": {
+                "de": "alle 4 Wochen",
+                "en": "every 4 weeks"
+              }
+            }
+          ],
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 4) || (![1,4].includes(data.d_r4_mode)))"
+        },
+        "d_r4_from2": {
+          "doNotSave": true,
+          "type": "timePicker",
+          "label": {
+            "de": "Fenster 2 von",
+            "en": "Window 2 from"
+          },
+          "returnFormat": "HH:mm:ss",
+          "format": "HH:mm",
+          "views": [
+            "hours",
+            "minutes"
+          ],
+          "timeSteps": {
+            "hours": 1,
+            "minutes": 5
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 4) || (data.d_r4_mode !== 1))",
+          "newLine": true
+        },
+        "d_r4_to2": {
+          "doNotSave": true,
+          "type": "timePicker",
+          "label": {
+            "de": "bis",
+            "en": "to"
+          },
+          "returnFormat": "HH:mm:ss",
+          "format": "HH:mm",
+          "views": [
+            "hours",
+            "minutes"
+          ],
+          "timeSteps": {
+            "hours": 1,
+            "minutes": 5
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 4) || (data.d_r4_mode !== 1))"
+        },
+        "d_r4_freq2": {
+          "doNotSave": true,
+          "type": "select",
+          "label": {
+            "de": "Wiederholung",
+            "en": "Repeat"
+          },
+          "options": [
+            {
+              "value": 86400,
+              "label": {
+                "de": "täglich",
+                "en": "daily"
+              }
+            },
+            {
+              "value": 172800,
+              "label": {
+                "de": "alle 2 Tage",
+                "en": "every 2 days"
+              }
+            },
+            {
+              "value": 259200,
+              "label": {
+                "de": "alle 3 Tage",
+                "en": "every 3 days"
+              }
+            },
+            {
+              "value": 345600,
+              "label": {
+                "de": "alle 4 Tage",
+                "en": "every 4 days"
+              }
+            },
+            {
+              "value": 432000,
+              "label": {
+                "de": "alle 5 Tage",
+                "en": "every 5 days"
+              }
+            },
+            {
+              "value": 604800,
+              "label": {
+                "de": "wöchentlich",
+                "en": "weekly"
+              }
+            },
+            {
+              "value": 1209600,
+              "label": {
+                "de": "alle 2 Wochen",
+                "en": "every 2 weeks"
+              }
+            },
+            {
+              "value": 1814400,
+              "label": {
+                "de": "alle 3 Wochen",
+                "en": "every 3 weeks"
+              }
+            },
+            {
+              "value": 2419200,
+              "label": {
+                "de": "alle 4 Wochen",
+                "en": "every 4 weeks"
+              }
+            }
+          ],
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 4) || (data.d_r4_mode !== 1))"
+        },
+        "d_r4_tempo": {
+          "doNotSave": true,
+          "type": "number",
+          "label": {
+            "de": "Laufzeit",
+            "en": "Run time"
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "unit": "min",
+          "min": 0,
+          "max": 180,
+          "step": 1,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 4) || (data.d_r4_mode !== 2))",
+          "newLine": true
+        },
+        "d_r4_key": {
+          "doNotSave": true,
+          "type": "select",
+          "label": {
+            "de": "Auslöser (Taster)",
+            "en": "Trigger key"
+          },
+          "options": [
+            {
+              "value": 0,
+              "label": {
+                "de": "keiner",
+                "en": "none"
+              }
+            },
+            {
+              "value": 1,
+              "label": {
+                "de": "Taster (+)",
+                "en": "Key (+)"
+              }
+            },
+            {
+              "value": 2,
+              "label": {
+                "de": "Taster (−)",
+                "en": "Key (−)"
+              }
+            }
+          ],
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 4) || (data.d_r4_mode !== 2))"
+        },
+        "d_r4_signal": {
+          "doNotSave": true,
+          "type": "select",
+          "label": {
+            "de": "Gekoppelt an",
+            "en": "Linked to"
+          },
+          "options": [
+            {
+              "value": 0,
+              "label": {
+                "de": "Abdeckung",
+                "en": "Cover"
+              }
+            },
+            {
+              "value": 1,
+              "label": {
+                "de": "Durchfluss FL1",
+                "en": "Flow FL1"
+              }
+            },
+            {
+              "value": 2,
+              "label": {
+                "de": "Durchfluss FL2",
+                "en": "Flow FL2"
+              }
+            },
+            {
+              "value": 3,
+              "label": {
+                "de": "Slave",
+                "en": "Slave"
+              }
+            },
+            {
+              "value": 4,
+              "label": {
+                "de": "Tank 1",
+                "en": "Tank 1"
+              }
+            },
+            {
+              "value": 5,
+              "label": {
+                "de": "Tank 2",
+                "en": "Tank 2"
+              }
+            },
+            {
+              "value": 6,
+              "label": {
+                "de": "Stromschleife 1",
+                "en": "Current loop 1"
+              }
+            },
+            {
+              "value": 7,
+              "label": {
+                "de": "Stromschleife 2",
+                "en": "Current loop 2"
+              }
+            }
+          ],
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 4) || (![3,4].includes(data.d_r4_mode)))",
+          "newLine": true
+        },
+        "d_r4_delay": {
+          "doNotSave": true,
+          "type": "number",
+          "label": {
+            "de": "Verzögerung",
+            "en": "Delay"
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "unit": "s",
+          "min": 0,
+          "max": 30,
+          "step": 1,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 4) || (![3,4].includes(data.d_r4_mode)))"
+        },
+        "d_r4_polarity": {
+          "doNotSave": true,
+          "type": "select",
+          "label": {
+            "de": "Kontakt",
+            "en": "Contact"
+          },
+          "options": [
+            {
+              "value": 0,
+              "label": {
+                "de": "Öffner",
+                "en": "Normally open"
+              }
+            },
+            {
+              "value": 1,
+              "label": {
+                "de": "Schließer",
+                "en": "Normally closed"
+              }
+            }
+          ],
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || ((data.x_relays < 4) || (![3,4].includes(data.d_r4_mode)))"
+        },
+        "_send4": {
+          "type": "sendTo",
+          "command": "applySettings",
+          "jsonData": "{\"poolId\":\"${data.poolId}\",\"section\":\"relay4\",\"values\":{\"d_r4_name\":\"${data.d_r4_name}\",\"d_r4_mode\":\"${data.d_r4_mode}\",\"d_r4_onoff\":\"${data.d_r4_onoff}\",\"d_r4_from\":\"${data.d_r4_from}\",\"d_r4_to\":\"${data.d_r4_to}\",\"d_r4_freq\":\"${data.d_r4_freq}\",\"d_r4_from2\":\"${data.d_r4_from2}\",\"d_r4_to2\":\"${data.d_r4_to2}\",\"d_r4_freq2\":\"${data.d_r4_freq2}\",\"d_r4_tempo\":\"${data.d_r4_tempo}\",\"d_r4_key\":\"${data.d_r4_key}\",\"d_r4_signal\":\"${data.d_r4_signal}\",\"d_r4_delay\":\"${data.d_r4_delay}\",\"d_r4_polarity\":\"${data.d_r4_polarity}\"}}",
+          "label": {
+            "de": "AUX 4 an Anlage senden",
+            "en": "Send AUX 4 to pool"
+          },
+          "icon": "send",
+          "variant": "contained",
+          "useNative": true,
+          "showProcess": true,
+          "timeout": 30000,
+          "newLine": true,
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4,
+          "confirm": {
+            "text": {
+              "de": "Die geänderten Werte werden sofort an die Poolsteuerung gesendet. Nur Felder, die von der Anlage abweichen, werden übertragen.",
+              "en": "Changed values are sent to the pool controller immediately. Only fields that differ from the controller are transmitted."
+            },
+            "title": {
+              "de": "An Anlage senden?",
+              "en": "Send to pool?"
+            },
+            "ok": {
+              "de": "Senden",
+              "en": "Send"
+            },
+            "cancel": {
+              "de": "Abbrechen",
+              "en": "Cancel"
+            },
+            "type": "warning"
+          },
+          "hidden": "(!data.x_loaded) || (data.x_relays < 4)"
+        },
+        "x_res_relay4": {
+          "type": "text",
+          "label": {
+            "de": "Letzte Übertragung",
+            "en": "Last transfer"
+          },
+          "readOnly": true,
+          "minRows": 2,
+          "maxRows": 8,
+          "doNotSave": true,
+          "noClearButton": true,
+          "newLine": true,
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 8,
+          "xl": 8,
+          "hidden": "!data.x_res_relay4"
+        },
+        "_hint": {
+          "type": "staticText",
+          "text": {
+            "de": "„Speichern“ unten betrifft nur Adapter-Einstellungen. Werte der Anlage werden ausschließlich über „An Anlage senden“ übertragen.",
+            "en": "“Save” only stores adapter settings. Pool values are only transferred with “Send to pool”."
+          },
+          "newLine": true,
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12,
+          "style": {
+            "opacity": 0.75,
+            "fontSize": 13
+          },
+          "hidden": "(!data.x_loaded)"
+        }
+      }
+    },
+    "tabWater": {
+      "type": "panel",
+      "label": {
+        "de": "Wasserpflege",
+        "en": "Water care"
+      },
+      "items": {
+        "_nl": {
+          "type": "infoBox",
+          "boxType": "info",
+          "closeable": false,
+          "title": {
+            "de": "Noch keine Daten von der Anlage",
+            "en": "No data from the pool yet"
+          },
+          "text": {
+            "de": "Öffne zuerst den Tab „Anlage“ und lade die Einstellungen. Die Instanz muss dafür laufen und mit deinem Vistapool-Konto verbunden sein.",
+            "en": "Open the “Pool” tab first and load the settings. The instance must be running and connected."
+          },
+          "hidden": "data.x_loaded",
+          "newLine": true,
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
+        },
+        "_autoload": {
+          "type": "sendTo",
+          "command": "loadSettings",
+          "jsonData": "{\"poolId\":\"${data.poolId}\"}",
+          "onLoaded": true,
+          "useNative": true,
+          "showProcess": true,
+          "timeout": 30000,
+          "label": {
+            "de": "Einstellungen von der Anlage laden",
+            "en": "Load settings from pool"
+          },
+          "icon": "refresh",
+          "variant": "outlined",
+          "newLine": true,
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4,
+          "hidden": "data.x_loaded || !_alive"
+        },
+        "_hHidro": {
+          "type": "header",
+          "text": {
+            "de": "Hydrolyse / Elektrolyse",
+            "en": "Hydrolysis / electrolysis"
+          },
+          "size": 4,
+          "newLine": true,
+          "hidden": "(!data.x_loaded) || (!data.x_hasHidro)"
+        },
+        "d_h_levelPct": {
+          "doNotSave": true,
+          "type": "number",
+          "label": {
+            "de": "Produktion",
+            "en": "Output"
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "unit": "%",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "newLine": true,
+          "hidden": "(!data.x_loaded) || ((!data.x_hasHidro) || (data.x_hidroUnit !== '%'))"
+        },
+        "d_h_levelGh": {
+          "doNotSave": true,
+          "type": "number",
+          "label": {
+            "de": "Produktion",
+            "en": "Output"
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "unit": "g/h",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "newLine": true,
+          "hidden": "(!data.x_loaded) || ((!data.x_hasHidro) || (data.x_hidroUnit === '%'))",
+          "validator": "data.d_h_levelGh <= data.x_hidroMax",
+          "validatorErrorText": "Above the cell maximum"
+        },
+        "d_h_cover": {
+          "doNotSave": true,
+          "type": "checkbox",
+          "label": {
+            "de": "Abdeckung erkennen",
+            "en": "Detect cover"
+          },
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4,
+          "hidden": "(!data.x_loaded) || (!data.x_hasHidro)",
+          "newLine": true,
+          "help": {
+            "de": "Produktion wird reduziert, solange die Abdeckung geschlossen ist.",
+            "en": "Output is reduced while the cover is closed."
+          }
+        },
+        "d_h_reduction": {
+          "doNotSave": true,
+          "type": "number",
+          "label": {
+            "de": "Reduktion bei Abdeckung",
+            "en": "Reduction with cover"
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "unit": "%",
+          "min": 1,
+          "max": 100,
+          "step": 1,
+          "hidden": "(!data.x_loaded) || ((!data.x_hasHidro) || (!data.d_h_cover))"
+        },
+        "d_h_shock": {
+          "doNotSave": true,
+          "type": "checkbox",
+          "label": {
+            "de": "Boost (Schockchlorung)",
+            "en": "Boost (shock)"
+          },
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4,
+          "hidden": "(!data.x_loaded) || (!data.x_hasHidro)",
+          "newLine": true
+        },
+        "boostPauseControl": {
+          "type": "checkbox",
+          "label": {
+            "de": "Redox-/Chlorregelung während Boost pausieren",
+            "en": "Pause redox/chlorine control during boost"
+          },
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4,
+          "hidden": "(!data.x_loaded) || (!data.x_hasHidro) || (!data.d_h_shock) || (!data.x_hasRX && !data.x_hasCL)",
+          "help": {
+            "de": "Wie die Rückfrage in der Web-App. Wird mit „Speichern“ übernommen.",
+            "en": "Like the question in the web app. Stored with “Save”."
+          }
+        },
+        "d_h_tempValue": {
+          "doNotSave": true,
+          "type": "number",
+          "label": {
+            "de": "Temperaturgrenze",
+            "en": "Temperature limit"
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "unit": "°C",
+          "min": 1,
+          "max": 100,
+          "step": 1,
+          "newLine": true,
+          "hidden": "(!data.x_loaded) || ((!data.x_hasHidro) || (!data.x_hidroTemp))"
+        },
+        "d_h_control": {
+          "doNotSave": true,
+          "type": "select",
+          "label": {
+            "de": "Produktion geregelt durch",
+            "en": "Output controlled by"
+          },
+          "options": [
+            {
+              "value": 0,
+              "label": {
+                "de": "Redox",
+                "en": "Redox"
+              }
+            },
+            {
+              "value": 1,
+              "label": {
+                "de": "Chlor",
+                "en": "Chlorine"
+              }
+            }
+          ],
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "newLine": true,
+          "hidden": "(!data.x_loaded) || ((!data.x_hasHidro) || (!data.x_hidroControl))"
+        },
+        "_hPh": {
+          "type": "header",
+          "text": {
+            "de": "pH",
+            "en": "pH"
+          },
+          "size": 4,
+          "newLine": true,
+          "hidden": "(!data.x_loaded) || (!data.x_hasPH)"
+        },
+        "d_ph_high": {
+          "doNotSave": true,
+          "type": "number",
+          "label": {
+            "de": "pH-Sollwert",
+            "en": "pH setpoint"
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "min": 5,
+          "max": 9,
+          "step": 0.1,
+          "newLine": true,
+          "hidden": "(!data.x_loaded) || (!data.x_hasPH || data.x_phType === 'BASE')",
+          "help": {
+            "de": "Bei Säure-Dosierung: oberhalb dieses Werts wird dosiert.",
+            "en": "Acid dosing above this value."
+          }
+        },
+        "d_ph_low": {
+          "doNotSave": true,
+          "type": "number",
+          "label": {
+            "de": "pH-Sollwert (Base)",
+            "en": "pH setpoint (base)"
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "min": 5,
+          "max": 9,
+          "step": 0.1,
+          "hidden": "(!data.x_loaded) || (!data.x_hasPH || data.x_phType === 'ACID')",
+          "help": {
+            "de": "Bei Base-Dosierung: unterhalb dieses Werts wird dosiert.",
+            "en": "Base dosing below this value."
+          }
+        },
+        "_hRx": {
+          "type": "header",
+          "text": {
+            "de": "Redox",
+            "en": "Redox"
+          },
+          "size": 4,
+          "newLine": true,
+          "hidden": "(!data.x_loaded) || (!data.x_hasRX)"
+        },
+        "d_rx_set": {
+          "doNotSave": true,
+          "type": "number",
+          "label": {
+            "de": "Redox-Sollwert",
+            "en": "Redox setpoint"
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "unit": "mV",
+          "min": 0,
+          "max": 1000,
+          "step": 5,
+          "newLine": true,
+          "hidden": "(!data.x_loaded) || (!data.x_hasRX)"
+        },
+        "_hCl": {
+          "type": "header",
+          "text": {
+            "de": "Chlor",
+            "en": "Chlorine"
+          },
+          "size": 4,
+          "newLine": true,
+          "hidden": "(!data.x_loaded) || (!data.x_hasCL)"
+        },
+        "d_cl_set": {
+          "doNotSave": true,
+          "type": "number",
+          "label": {
+            "de": "Chlor-Sollwert",
+            "en": "Chlorine setpoint"
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "unit": "ppm",
+          "min": 0,
+          "max": 10,
+          "step": 0.05,
+          "newLine": true,
+          "hidden": "(!data.x_loaded) || (!data.x_hasCL)"
+        },
+        "_hCd": {
+          "type": "header",
+          "text": {
+            "de": "Leitfähigkeit",
+            "en": "Conductivity"
+          },
+          "size": 4,
+          "newLine": true,
+          "hidden": "(!data.x_loaded) || (!data.x_hasCD)"
+        },
+        "d_cd_set": {
+          "doNotSave": true,
+          "type": "number",
+          "label": {
+            "de": "Leitfähigkeit-Sollwert",
+            "en": "Conductivity setpoint"
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "min": 0,
+          "max": 40000,
+          "step": 100,
+          "newLine": true,
+          "hidden": "(!data.x_loaded) || (!data.x_hasCD)"
+        },
+        "_send": {
+          "type": "sendTo",
+          "command": "applySettings",
+          "jsonData": "{\"poolId\":\"${data.poolId}\",\"section\":\"water\",\"values\":{\"d_h_levelPct\":\"${data.d_h_levelPct}\",\"d_h_levelGh\":\"${data.d_h_levelGh}\",\"d_h_cover\":\"${data.d_h_cover}\",\"d_h_reduction\":\"${data.d_h_reduction}\",\"d_h_shock\":\"${data.d_h_shock}\",\"d_h_tempValue\":\"${data.d_h_tempValue}\",\"d_h_control\":\"${data.d_h_control}\",\"d_ph_high\":\"${data.d_ph_high}\",\"d_ph_low\":\"${data.d_ph_low}\",\"d_rx_set\":\"${data.d_rx_set}\",\"d_cl_set\":\"${data.d_cl_set}\",\"d_cd_set\":\"${data.d_cd_set}\"}}",
+          "label": {
+            "de": "Wasserpflege an Anlage senden",
+            "en": "Send water care to pool"
+          },
+          "icon": "send",
+          "variant": "contained",
+          "useNative": true,
+          "showProcess": true,
+          "timeout": 30000,
+          "newLine": true,
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4,
+          "confirm": {
+            "text": {
+              "de": "Die geänderten Werte werden sofort an die Poolsteuerung gesendet. Nur Felder, die von der Anlage abweichen, werden übertragen.",
+              "en": "Changed values are sent to the pool controller immediately. Only fields that differ from the controller are transmitted."
+            },
+            "title": {
+              "de": "An Anlage senden?",
+              "en": "Send to pool?"
+            },
+            "ok": {
+              "de": "Senden",
+              "en": "Send"
+            },
+            "cancel": {
+              "de": "Abbrechen",
+              "en": "Cancel"
+            },
+            "type": "warning"
+          },
+          "hidden": "(!data.x_loaded)"
+        },
+        "_hint": {
+          "type": "staticText",
+          "text": {
+            "de": "„Speichern“ unten betrifft nur Adapter-Einstellungen. Werte der Anlage werden ausschließlich über „An Anlage senden“ übertragen.",
+            "en": "“Save” only stores adapter settings. Pool values are only transferred with “Send to pool”."
+          },
+          "newLine": true,
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12,
+          "style": {
+            "opacity": 0.75,
+            "fontSize": 13
+          },
+          "hidden": "(!data.x_loaded)"
+        },
+        "x_res_water": {
+          "type": "text",
+          "label": {
+            "de": "Letzte Übertragung",
+            "en": "Last transfer"
+          },
+          "readOnly": true,
+          "minRows": 2,
+          "maxRows": 8,
+          "doNotSave": true,
+          "noClearButton": true,
+          "newLine": true,
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 8,
+          "xl": 8,
+          "hidden": "!data.x_res_water"
+        }
+      }
+    },
+    "tabBackwash": {
+      "type": "panel",
+      "label": {
+        "de": "Rückspülung",
+        "en": "Backwash"
+      },
+      "items": {
+        "_nl": {
+          "type": "infoBox",
+          "boxType": "info",
+          "closeable": false,
+          "title": {
+            "de": "Noch keine Daten von der Anlage",
+            "en": "No data from the pool yet"
+          },
+          "text": {
+            "de": "Öffne zuerst den Tab „Anlage“ und lade die Einstellungen. Die Instanz muss dafür laufen und mit deinem Vistapool-Konto verbunden sein.",
+            "en": "Open the “Pool” tab first and load the settings. The instance must be running and connected."
+          },
+          "hidden": "data.x_loaded",
+          "newLine": true,
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
+        },
+        "_autoload": {
+          "type": "sendTo",
+          "command": "loadSettings",
+          "jsonData": "{\"poolId\":\"${data.poolId}\"}",
+          "onLoaded": true,
+          "useNative": true,
+          "showProcess": true,
+          "timeout": 30000,
+          "label": {
+            "de": "Einstellungen von der Anlage laden",
+            "en": "Load settings from pool"
+          },
+          "icon": "refresh",
+          "variant": "outlined",
+          "newLine": true,
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4,
+          "hidden": "data.x_loaded || !_alive"
+        },
+        "_none": {
+          "type": "infoBox",
+          "boxType": "info",
+          "closeable": false,
+          "newLine": true,
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12,
+          "text": {
+            "de": "Diese Anlage hat keine automatische Rückspülung.",
+            "en": "This pool has no automatic backwash."
+          },
+          "hidden": "!data.x_loaded || data.x_hasBackwash"
+        },
+        "d_b_mode": {
+          "doNotSave": true,
+          "type": "select",
+          "format": "radio",
+          "horizontal": true,
+          "label": {
+            "de": "Modus",
+            "en": "Mode"
+          },
+          "options": [
+            {
+              "value": 0,
+              "label": {
+                "de": "Manuell",
+                "en": "Manual"
+              }
+            },
+            {
+              "value": 1,
+              "label": {
+                "de": "Auto (Zeitplan)",
+                "en": "Auto (schedule)"
+              }
+            }
+          ],
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12,
+          "newLine": true,
+          "hidden": "(!data.x_loaded) || (!data.x_hasBackwash)"
+        },
+        "d_b_status": {
+          "doNotSave": true,
+          "type": "checkbox",
+          "label": {
+            "de": "Rückspülung jetzt laufen lassen",
+            "en": "Run backwash now"
+          },
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4,
+          "newLine": true,
+          "hidden": "(!data.x_loaded) || ((!data.x_hasBackwash) || (data.d_b_mode !== 0))"
+        },
+        "d_b_start": {
+          "doNotSave": true,
+          "type": "timePicker",
+          "label": {
+            "de": "Startzeit",
+            "en": "Start time"
+          },
+          "returnFormat": "HH:mm:ss",
+          "format": "HH:mm",
+          "views": [
+            "hours",
+            "minutes"
+          ],
+          "timeSteps": {
+            "hours": 1,
+            "minutes": 5
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "newLine": true,
+          "hidden": "(!data.x_loaded) || ((!data.x_hasBackwash) || (data.d_b_mode !== 1))"
+        },
+        "d_b_interval": {
+          "doNotSave": true,
+          "type": "number",
+          "label": {
+            "de": "Dauer",
+            "en": "Duration"
+          },
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "unit": "s",
+          "min": 0,
+          "max": 3600,
+          "step": 10,
+          "hidden": "(!data.x_loaded) || ((!data.x_hasBackwash) || (data.d_b_mode !== 1))"
+        },
+        "d_b_freq": {
+          "doNotSave": true,
+          "type": "select",
+          "label": {
+            "de": "Wiederholung",
+            "en": "Repeat"
+          },
+          "options": [
+            {
+              "value": 86400,
+              "label": {
+                "de": "täglich",
+                "en": "daily"
+              }
+            },
+            {
+              "value": 172800,
+              "label": {
+                "de": "alle 2 Tage",
+                "en": "every 2 days"
+              }
+            },
+            {
+              "value": 259200,
+              "label": {
+                "de": "alle 3 Tage",
+                "en": "every 3 days"
+              }
+            },
+            {
+              "value": 345600,
+              "label": {
+                "de": "alle 4 Tage",
+                "en": "every 4 days"
+              }
+            },
+            {
+              "value": 432000,
+              "label": {
+                "de": "alle 5 Tage",
+                "en": "every 5 days"
+              }
+            },
+            {
+              "value": 604800,
+              "label": {
+                "de": "wöchentlich",
+                "en": "weekly"
+              }
+            },
+            {
+              "value": 1209600,
+              "label": {
+                "de": "alle 2 Wochen",
+                "en": "every 2 weeks"
+              }
+            },
+            {
+              "value": 1814400,
+              "label": {
+                "de": "alle 3 Wochen",
+                "en": "every 3 weeks"
+              }
+            },
+            {
+              "value": 2419200,
+              "label": {
+                "de": "alle 4 Wochen",
+                "en": "every 4 weeks"
+              }
+            }
+          ],
+          "xs": 12,
+          "sm": 4,
+          "md": 4,
+          "lg": 3,
+          "xl": 3,
+          "hidden": "(!data.x_loaded) || ((!data.x_hasBackwash) || (data.d_b_mode !== 1))"
+        },
+        "_send": {
+          "type": "sendTo",
+          "command": "applySettings",
+          "jsonData": "{\"poolId\":\"${data.poolId}\",\"section\":\"backwash\",\"values\":{\"d_b_mode\":\"${data.d_b_mode}\",\"d_b_status\":\"${data.d_b_status}\",\"d_b_start\":\"${data.d_b_start}\",\"d_b_interval\":\"${data.d_b_interval}\",\"d_b_freq\":\"${data.d_b_freq}\"}}",
+          "label": {
+            "de": "Rückspülung an Anlage senden",
+            "en": "Send backwash to pool"
+          },
+          "icon": "send",
+          "variant": "contained",
+          "useNative": true,
+          "showProcess": true,
+          "timeout": 30000,
+          "newLine": true,
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4,
+          "confirm": {
+            "text": {
+              "de": "Die geänderten Werte werden sofort an die Poolsteuerung gesendet. Nur Felder, die von der Anlage abweichen, werden übertragen.",
+              "en": "Changed values are sent to the pool controller immediately. Only fields that differ from the controller are transmitted."
+            },
+            "title": {
+              "de": "An Anlage senden?",
+              "en": "Send to pool?"
+            },
+            "ok": {
+              "de": "Senden",
+              "en": "Send"
+            },
+            "cancel": {
+              "de": "Abbrechen",
+              "en": "Cancel"
+            },
+            "type": "warning"
+          },
+          "hidden": "(!data.x_loaded) || (!data.x_hasBackwash)"
+        },
+        "x_res_backwash": {
+          "type": "text",
+          "label": {
+            "de": "Letzte Übertragung",
+            "en": "Last transfer"
+          },
+          "readOnly": true,
+          "minRows": 2,
+          "maxRows": 8,
+          "doNotSave": true,
+          "noClearButton": true,
+          "newLine": true,
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 8,
+          "xl": 8,
+          "hidden": "!data.x_res_backwash"
+        }
+      }
+    }
+  }
+}
