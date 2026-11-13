@@ -1,8 +1,21 @@
 {
     "common": {
         "name": "vistapool",
-        "version": "0.3.1",
+        "version": "0.3.2",
         "news": {
+            "0.3.2": {
+                "en": "While the boost (shock chlorination) is active, \"pump off\" is not sent – the controller keeps the pump running; a hint is logged",
+                "de": "Solange der Boost (Schockchlorung) aktiv ist, wird „Pumpe aus“ nicht gesendet – die Steuerung hält die Pumpe dann an; im Log steht ein Hinweis",
+                "ru": "Пока активен boost (ударное хлорирование), «насос выкл.» не отправляется – контроллер оставляет насос включённым; в журнал пишется подсказка",
+                "pt": "Enquanto o boost (cloração de choque) estiver ativo, \"bomba desligada\" não é enviado – o controlador mantém a bomba ligada; é registada uma dica",
+                "nl": "Zolang de boost (shockchlorering) actief is, wordt \"pomp uit\" niet verzonden – de controller laat de pomp draaien; er wordt een hint gelogd",
+                "fr": "Tant que le boost (chloration choc) est actif, « pompe arrêt » n'est pas envoyé – le contrôleur maintient la pompe en marche ; un conseil est journalisé",
+                "it": "Finché il boost (clorazione shock) è attivo, \"pompa spenta\" non viene inviato – il controller mantiene la pompa accesa; viene registrato un suggerimento",
+                "es": "Mientras el boost (cloración de choque) está activo, no se envía \"bomba apagada\": el controlador mantiene la bomba en marcha; se registra un aviso",
+                "pl": "Gdy boost (chlorowanie szokowe) jest aktywny, „pompa wył.” nie jest wysyłane – sterownik utrzymuje pompę w pracy; w logu pojawia się wskazówka",
+                "uk": "Поки активний boost (ударне хлорування), «насос вимк.» не надсилається – контролер тримає насос увімкненим; у журнал пишеться підказка",
+                "zh-cn": "增强（冲击氯化）运行期间不会发送“泵关闭”——控制器会保持泵运行；日志中会给出提示"
+            },
             "0.3.1": {
                 "en": "Fix: pump mode \"manual\" and pump on/off written together are sent as one tracked command",
                 "de": "Fehlerbehebung: Pumpenmodus „manuell“ und Pumpe ein/aus gleichzeitig geschrieben werden als ein bestätigter Befehl gesendet",

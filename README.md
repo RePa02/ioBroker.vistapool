@@ -99,6 +99,7 @@ on({ id: 'vistapool.0.*.info.lastCommandStatus', change: 'ne' }, obj => {
 - **Clock and time zone:** the clock sync uses the time zone of the ioBroker host. If ioBroker runs in UTC (e.g. Docker without `TZ`), enter the time zone of the pool (e.g. `Europe/Berlin`) in the instance settings, otherwise the automatic sync stays off.
 - **Load on the cloud:** please do not lower the poll interval without need. With push, the adapter reads only every 15 minutes as a safety net.
 - **Relay names** cannot be cleared – the controller ignores empty names. **LED:** only "next colour", no direct colour selection.
+- **Boost (shock chlorination)** keeps the pump running – the controller refuses "pump off" in manual mode until the boost is switched off. The adapter does not send it and logs a hint.
 - Commands waiting for confirmation are lost when the adapter restarts.
 
 ## Help with other controllers
@@ -140,6 +141,9 @@ Hayward, AquaRite, Vistapool, Sugar Valley, Kripsol and Dagen are trademarks of 
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
+### 0.3.2 (2026-11-13)
+- (RePa02) While the boost (shock chlorination) is active, "pump off" is not sent: the controller keeps the pump running. A hint is logged and `filtration.on` shows the real state again
+
 ### 0.3.1 (2026-11-12)
 - (RePa02) Fix: pump mode "manual" and pump on/off written together are sent as one tracked command (the mode check used the old mode)
 

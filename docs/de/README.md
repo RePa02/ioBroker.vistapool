@@ -100,6 +100,7 @@ on({ id: 'vistapool.0.*.info.lastCommandStatus', change: 'ne' }, obj => {
 - **Uhrzeit und Zeitzone:** Die Synchronisation nutzt die Zeitzone des ioBroker-Servers. Läuft ioBroker in UTC (z. B. Docker ohne `TZ`), trage in der Instanz die Zeitzone der Anlage ein (z. B. `Europe/Berlin`), sonst bleibt die automatische Synchronisation aus.
 - **Last auf der Cloud:** Das Abfrageintervall bitte nicht ohne Not verkleinern. Mit Push liest der Adapter nur alle 15 Minuten zur Sicherheit.
 - **Relais-Namen** lassen sich nicht leeren – die Steuerung ignoriert leere Namen. **LED:** nur „nächste Farbe“, keine direkte Farbwahl.
+- **Boost (Schockchlorung)** hält die Pumpe an – „Pumpe aus“ nimmt die Steuerung im manuellen Modus erst an, wenn der Boost aus ist. Der Adapter sendet den Befehl dann nicht und schreibt einen Hinweis ins Log.
 - Befehle, die noch auf Bestätigung warten, gehen bei einem Neustart des Adapters verloren.
 - **Bei Frost die Filtration nicht ausgeschaltet lassen.**
 

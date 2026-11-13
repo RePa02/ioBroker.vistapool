@@ -315,6 +315,26 @@ async function test(name, fn) {
         assert.equal(h19.inflight.size, 1, 'Bestaetigung wird verfolgt');
         assert.ok(!a19.logs.some(l => l.includes('not "manual"')));
     });
+    await test('Pumpe aus bei aktivem Schock: kein Befehl, Hinweis, Zustand bleibt an', async () => {
+        const a20 = mockAdapter(), c20 = mockCloud();
+        const h20 = new PoolHandler(a20, c20, 'P', { commandGap: 0, coalesceMs: 0, maxPerMinute: 0 });
+        const d20 = doc(); d20.filtration.mode = 0; d20.filtration.status = 1; d20.hidro.cloration_enabled = 1;
+        await h20.update(d20);
+        await h20.handleStateChange('filtration.on', false);
+        assert.equal(c20.sent.length, 0);
+        assert.equal(a20.states['P.filtration.on'], true);
+        assert.ok(a20.logs.some(l => l.includes('boost')));
+    });
+    await test('Schock aus und Pumpe aus zusammen: beides wird gesendet', async () => {
+        const a21 = mockAdapter(), c21 = mockCloud();
+        const h21 = new PoolHandler(a21, c21, 'P', { commandGap: 0, coalesceMs: 30, maxPerMinute: 0 });
+        const d21 = doc(); d21.filtration.mode = 0; d21.filtration.status = 1; d21.hidro.cloration_enabled = 1;
+        await h21.update(d21);
+        await Promise.all([h21.handleStateChange('electrolysis.boost', false), h21.handleStateChange('filtration.on', false)]);
+        const all = c21.sent.map(changes);
+        assert.ok(all.some(x => x.filtration && x.filtration.status === 0));
+        assert.ok(all.some(x => x.hidro && x.hidro.cloration_enabled === 0));
+    });
     await test('Ungueltiger Wert im Buendel blockiert die anderen nicht', async () => {
         const a10 = mockAdapter(), c10 = mockCloud();
         const h10 = new PoolHandler(a10, c10, 'P', { commandGap: 0, coalesceMs: 30, maxPerMinute: 0 });
